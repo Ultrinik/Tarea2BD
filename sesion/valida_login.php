@@ -8,8 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	
     if( pg_num_rows($result) == 1 ) {
         while($row = pg_fetch_assoc($result)) {
-			echo $contrasena;
-			echo $row['contraseña'];
             if(password_verify($contrasena, $row['contraseña'])){
 			#if($contrasena == $row['contraseña']){
 
