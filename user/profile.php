@@ -1,5 +1,4 @@
-<?php session_start();
-include $_SERVER['DOCUMENT_ROOT'].'/db_config.php';
+<?php include $_SERVER['DOCUMENT_ROOT'].'/db_config.php';
 
 $nombre = $_SESSION["usuario"];
 $correo = $_SESSION["correo"];

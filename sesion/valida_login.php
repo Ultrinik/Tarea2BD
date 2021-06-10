@@ -8,13 +8,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	
     while($row = pg_fetch_assoc($result)) {
         if(password_verify($contrasena, $row['contraseña'])){
-        #if($contrasena == $row['contraseña']){
 
             session_start();
             $_SESSION["usuario"] = $row['nombre'] . ' ' . $row['apellido'];
+            $_SESSION["id"] = $row['id'];
             $_SESSION["correo"]= $row['correo'];
             $_SESSION["pais"]= $row['pais'];
             $_SESSION["fecha_registro"]= $row['fecha_registro'];
+            $_SESSION["administrador"] = $row['administrador'];
             pg_close($dbconn);
     
 
