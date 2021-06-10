@@ -1,4 +1,3 @@
-<?php session_start();?>
 <?php include '../include/navbar.html'; ?>
 <?php include 'profile.php'; ?>
     <div class='container-fluid'>
@@ -9,10 +8,10 @@
             <div class="col">
                 <!-- Mostrar aquí los datos del usuario de la sesión -->
                 <div class="container shadow-lg rounded m-auto p-5">
-                    <p>Nombre Completo: <?= $_SESSION["usuario"] ?></p>
-                    <p>Correo: </p>
-                    <p>País: </p>
-                    <p>Fecha de Ingreso:</p>
+                    <p>Nombre Completo: <?= $nombre ?></p>
+                    <p>Correo: <?= $correo ?></p>
+                    <p>País: <?= $pais ?></p>
+                    <p>Fecha de Ingreso: <?= $fecha_registro ?></p>
                 </div>
             </div>
         </div>
