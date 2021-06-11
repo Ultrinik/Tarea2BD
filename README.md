@@ -8,15 +8,15 @@
 blablabla
 
 ## Archivos adicionales:
-#Imágenes:
-Se añadió la imagen img/bitcoin1.jpg con el objetivo de usarla como fondo de pantalla en algunas vistas.
+### Imágenes:
+- Se añadió la imagen img/bitcoin1.jpg con el objetivo de usarla como fondo de pantalla en algunas vistas.
 
-## HTML’s:
-Se añadió el html extras/redirect.html con el objetivo de informar al usuario al acceder a una vista sin permisos.
-Se añadió el html extras/sing-up-succes.html con el objeto de informar al usuario que su usuario ha sido creado con éxito.
+### HTML’s:
+- Se añadió el html extras/redirect.html con el objetivo de informar al usuario al acceder a una vista sin permisos.
+- Se añadió el html extras/sing-up-succes.html con el objeto de informar al usuario que su usuario ha sido creado con éxito.
 
-## PHP’s:
-blablabla
+### PHP’s:
+- blablabla
 
 ## Modelo de datos:
 ### Usuario Admin:
