@@ -18,23 +18,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = 'SELECT * FROM usuario WHERE correo = $1'; 
     $result = pg_query_params($dbconn, $sql, array($correo));
 
-    if( pg_num_rows($result) > 0 ){
-        #usuario ya existe
-        echo '<h1> El usuario ya existe </h1>';
-        pg_close($dbconn);
-        
+    #crear usuario
+    $opciones = array('cost'=>12);
+    $contrasena_hasheada = password_hash($contrasena, PASSWORD_BCRYPT, $opciones);
+    $sql = 'INSERT INTO usuario (id, nombre, apellido, correo, contraseña, pais, fecha_registro, administrador) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
+    #if(pg_query_params($dbconn, $sql, array($id, $nombre, $apellido, $correo, $contrasena_hasheada, $pais, $fecha_registro, $administrador)) !== FALSE){
+    if(pg_query_params($dbconn, $sql, array($id, $nombre, $apellido, $correo, $contrasena, $pais, $fecha_registro, $administrador)) !== FALSE){
+        echo '<br> Usuario creado correctamente! Por favor ingrese mediante el ';
+        echo '<a href="log-in.html"> Log-in </a> <br>';
     } else {
-        #crear usuario
-        $opciones = array('cost'=>12);
-        $contrasena_hasheada = password_hash($contrasena, PASSWORD_BCRYPT, $opciones);
-        $sql = 'INSERT INTO usuario (id, nombre, apellido, correo, contraseña, pais, fecha_registro, administrador) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
-        if(pg_query_params($dbconn, $sql, array($id, $nombre, $apellido, $correo, $contrasena_hasheada, $pais, $fecha_registro, $administrador)) !== FALSE){
-            echo '<br> Usuario creado correctamente! Por favor ingrese mediante el ';
-            echo '<a href="log-in.html"> Log-in </a> <br>';
-        } else {
-            echo '<br> Ocurrió un error';
-        }
-        pg_close($dbconn);
+        echo '<br> Ocurrió un error';
     }
+    pg_close($dbconn);
 }
 ?>

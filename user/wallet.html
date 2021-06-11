@@ -1,4 +1,5 @@
 <?php include '../include/navbar.html'; ?>
+<?php include 'wallet.php'; ?>
     <div class='container-fluid'>
         <div class="row p-3">
             <h1>Mi Billetera</h1>
@@ -6,27 +7,41 @@
         <div class="row p-3">
             <div class="col">
                 <div class="container shadow-lg rounded m-auto p-5">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Código</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Cantidad</th>
-                                <th scope="col">Valor Actual</th>
-                                <th scope="col">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Debería haber una de estas por cada moneda que tenga el usuario -->
-                            <tr>
-                                <td >DRCY</td>
-                                <td>Prestigiocoin</td>
-                                <td>12.34</td>
-                                <td>10.0 USD</td>
-                                <td>123.4 USD</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <?php if ($sesionActiva): ?>
+                        <?php if ($num_billeteras > 0): ?>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Código</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Valor Actual</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Debería haber una de estas por cada moneda que tenga el usuario -->
+                                    <?php
+                                    while ($row = pg_fetch_assoc($result)){
+                                    ?>
+                                        <tr>
+                                            <td ><?= $row['codigo'] ?></td>
+                                            <td><?= $row['nombre'] ?></td>
+                                            <td><?= $row['balance'] ?></td>
+                                            <td><?= $row['valor'] ?> USD</td>
+                                            <td><?= $row['total'] ?> USD</td>
+                                        </tr>
+                                    <?php 
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        <?php else: ?>
+                            <p>Nos duele entregarle la dolorosa noticia de que usted no tiene cryptos.</p>
+                        <?php endif ?>
+                    <?php else: ?>
+                    <p>Por favor ingrese con una sesión valida.</p>
+                    <?php endif ?>
                 </div>
             </div>
         </div>
