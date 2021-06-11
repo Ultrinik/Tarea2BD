@@ -7,11 +7,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $row = pg_fetch_row($result);
     $id = $row[0] + 1;
 	
-    $nombre = $_POST["nombre"];
-    $apellido = $_POST["apellido"];
-    $correo = $_POST["correo"];
-    $contrasena = $_POST["contraseña"];
-    $pais = $_POST["pais"];
+    $nombre = filter_var($_POST["nombre"], FILTER_SANITIZE_STRING);
+    $apellido = filter_var($_POST["apellido"], FILTER_SANITIZE_STRING);
+    $correo = filter_var($_POST["correo"], FILTER_SANITIZE_STRING);
+    $contrasena = filter_var($_POST["contraseña"], FILTER_SANITIZE_STRING);
+    $pais = filter_var($_POST["pais"], FILTER_SANITIZE_STRING);
     $fecha_registro = date("Y-m-d H:i:s");
     $administrador = 0;
     #query

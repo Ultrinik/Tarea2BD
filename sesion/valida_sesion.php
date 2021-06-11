@@ -9,6 +9,8 @@ if (isset($_SESSION['id'])) {
    $num_billeteras = pg_num_rows($billeteras);
 
    $admin = $_SESSION['administrador'];
+
+   pg_close($dbconn);
 }
 else{
    $sesionActiva = 0;
