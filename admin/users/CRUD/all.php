@@ -4,12 +4,7 @@ if(isset($_SESSION['id'])){
     $sesionActiva = 1;
     $admin = $_SESSION['administrador'];
 
-    $sql = '
-    SELECT
-        id, nombre, apellido, correo
-    FROM
-        usuario
-    ';
+    $sql = 'SELECT * FROM usuario';
     $result = pg_query($dbconn, $sql);
 
     pg_close($dbconn);
