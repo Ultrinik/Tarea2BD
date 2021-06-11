@@ -37,10 +37,10 @@
                                 </tbody>
                             </table>
                         <?php else: ?>
-                            <p>Nos duele entregarle la dolorosa noticia de que usted no tiene cryptos.</p>
+                            <?php header('Location: '.'/extras/redirect.html'); ?>
                         <?php endif ?>
                     <?php else: ?>
-                    <p>Por favor ingrese con una sesión valida.</p>
+                        <?php header('Location: '.'/extras/redirect.html'); ?>
                     <?php endif ?>
                 </div>
             </div>
