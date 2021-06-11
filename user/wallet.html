@@ -7,38 +7,34 @@
         <div class="row p-3">
             <div class="col">
                 <div class="container shadow-lg rounded m-auto p-5">
-                    <?php if ($sesionActiva): ?>
-                        <?php if ($num_billeteras > 0): ?>
-                            <table class="table">
-                                <thead>
+                    <?php if ($sesionActiva and $num_billeteras > 0): ?>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Código</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Valor Actual</th>
+                                    <th scope="col">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Debería haber una de estas por cada moneda que tenga el usuario -->
+                                <?php
+                                while ($row = pg_fetch_assoc($result)){
+                                ?>
                                     <tr>
-                                        <th scope="col">Código</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Cantidad</th>
-                                        <th scope="col">Valor Actual</th>
-                                        <th scope="col">Total</th>
+                                        <td ><?= $row['codigo'] ?></td>
+                                        <td><?= $row['nombre'] ?></td>
+                                        <td><?= $row['balance'] ?></td>
+                                        <td><?= $row['valor'] ?> USD</td>
+                                        <td><?= $row['total'] ?> USD</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Debería haber una de estas por cada moneda que tenga el usuario -->
-                                    <?php
-                                    while ($row = pg_fetch_assoc($result)){
-                                    ?>
-                                        <tr>
-                                            <td ><?= $row['codigo'] ?></td>
-                                            <td><?= $row['nombre'] ?></td>
-                                            <td><?= $row['balance'] ?></td>
-                                            <td><?= $row['valor'] ?> USD</td>
-                                            <td><?= $row['total'] ?> USD</td>
-                                        </tr>
-                                    <?php 
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        <?php else: ?>
-                            <?php header('Location: '.'/extras/redirect.html'); ?>
-                        <?php endif ?>
+                                <?php 
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     <?php else: ?>
                         <?php header('Location: '.'/extras/redirect.html'); ?>
                     <?php endif ?>
