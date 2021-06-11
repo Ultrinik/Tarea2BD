@@ -24,8 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = 'INSERT INTO usuario (id, nombre, apellido, correo, contraseña, pais, fecha_registro, administrador) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
     #if(pg_query_params($dbconn, $sql, array($id, $nombre, $apellido, $correo, $contrasena_hasheada, $pais, $fecha_registro, $administrador)) !== FALSE){
     if(pg_query_params($dbconn, $sql, array($id, $nombre, $apellido, $correo, $contrasena, $pais, $fecha_registro, $administrador)) !== FALSE){
-        echo '<br> Usuario creado correctamente! Por favor ingrese mediante el ';
-        echo '<a href="log-in.html"> Log-in </a> <br>';
+        header('Location: '.'/extras/sing-up-succes.html');
     } else {
         echo '<br> Ocurrió un error';
     }
