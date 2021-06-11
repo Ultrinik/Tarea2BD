@@ -8,10 +8,14 @@
             <div class="col">
                 <!-- Mostrar aquí los datos del usuario de la sesión -->
                 <div class="container shadow-lg rounded m-auto p-5">
+                    <?php if ($sesionActiva): ?>
                     <p>Nombre Completo: <?= $nombre ?></p>
                     <p>Correo: <?= $correo ?></p>
                     <p>País: <?= $pais ?></p>
                     <p>Fecha de Ingreso: <?= $fecha_registro ?></p>
+                    <?php else: ?>
+                    <p>Por favor ingrese con una sesión valida.</p>
+                    <?php endif ?>
                 </div>
             </div>
         </div>
