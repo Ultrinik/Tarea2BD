@@ -24,7 +24,7 @@ Para implementar esto hemos añadido una columna booleana extra a la tabla usuar
 Ventajas: Una solución rápida y simple para categorizar.
 Desventajas: Se tuvo que actualizar a todos los otros usuarios en la DB con un valor para este nuevo atributo.
 
-### Contraseñas de usuario:
+### Contraseñas de usuarios:
 Se extendió el máximo de caracteres de las contraseñas a 60 caracteres para permitir el hashing de estas.
 Ventajas: Mayor seguridad para los usuarios.
 Desventajas: Ligero aumento de cómputo por los hasheos.
