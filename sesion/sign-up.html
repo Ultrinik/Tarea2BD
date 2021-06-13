@@ -6,15 +6,32 @@
     <script>
           
         function checkPassword(form) {
+            nombre = form.name.value;
+            apellido = form.surname.value;
+            correo = form.email.value;
             password1 = form.pwd.value;
             password2 = form.pwd2.value;
 
-            if (password1 == '')
-                alert ("Debe ingresar una contraseña");
+            if (nombre.length > 50){
+                alert ("Nombre demasiado largo")
+                return false;
+
+            }
+            else if (apellido.length > 50){
+                alert ("Apellido demasiado largo")
+                return false;
+
+            }
+            else if (correo.length > 50){
+                alert ("Correo demasiado largo")
+                return false;
                   
-            else if (password2 == '')
-                alert ("Debe comprobar la contraseña");
+            }
+            else if (password1.length > 60){
+                alert ("Contraseña demasiado larga")
+                return false;
                     
+            }
             else if (password1 != password2) {
                 alert ("\nLas contraseñas no coinciden. Intente denuevo...")
                 return false;

@@ -7,26 +7,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = pg_query_params($dbconn, $sql, array($correo));
     $row = pg_fetch_assoc($result);
 	
-    #if(password_verify($contrasena, $row['contraseña'])){
-    if(pg_num_rows($result) == 0 or $contrasena == $row['contraseña']){
+    if(pg_num_rows($result) != 0){
+        #if(password_verify($contrasena, $row['contraseña'])){
+        if($contrasena == $row['contraseña']){
 
-        session_start();
-        $_SESSION["usuario"] = $row['nombre'] . ' ' . $row['apellido'];
-        $_SESSION["id"] = $row['id'];
-        $_SESSION["correo"]= $row['correo'];
-        $_SESSION["pais"]= $row['pais'];
-        $_SESSION["fecha_registro"]= $row['fecha_registro'];
-        $_SESSION["administrador"] = $row['administrador'];
-        pg_close($dbconn);
-	
-	
-		header('Location: '.'/user/profile.html');
-		exit();
+            session_start();
+            $_SESSION["usuario"] = $row['nombre'] . ' ' . $row['apellido'];
+            $_SESSION["id"] = $row['id'];
+            $_SESSION["correo"]= $row['correo'];
+            $_SESSION["pais"]= $row['pais'];
+            $_SESSION["fecha_registro"]= $row['fecha_registro'];
+            $_SESSION["administrador"] = $row['administrador'];
+            pg_close($dbconn);
+        
+        
+            header('Location: '.'/user/profile.html');
+            exit();
+
+        } else {
+            echo '<script language="javascript">';
+            echo 'alert ("\nCorreo o ontraseña incorrecto/s.")';
+            echo '</script>';
+            header('Location: '.'/sesion/log-in.html');
+            pg_close($dbconn);
+        }
         
     } else {
-        ?>
-        alert ("\nUsuario no encontrado. Intente denuevo...")
-        <?php
+        echo '<script language="javascript">';
+        echo 'alert ("\nCorreo o ontraseña incorrecto/s.")';
+        echo '</script>';
+        header('Location: '.'/sesion/log-in.html');
         pg_close($dbconn);
     }
     

@@ -20,39 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if( pg_num_rows($result) > 0 ){
         #usuario ya existe
-        ?>
-        alert ("\nUsuario ya registrado.")
-        <?php
-        pg_close($dbconn);
-        
-    }elseif( $contrasena < 1 or $contrasena > 60 ){
-        #usuario ya existe
-        ?>
-        alert ("\nLargo de contraseña invalido.")
-        <?php
-        pg_close($dbconn);
-        
-    }elseif( $nombre < 1 or $nombre > 50 ){
-        #usuario ya existe
-        ?>
-        alert ("\nLargo de nombre invalido.")
-        <?php
-        pg_close($dbconn);
-        
-    }elseif( $apellido < 1 or $apellido > 50 ){
-        #usuario ya existe
-        ?>
-        alert ("\nLargo de apellido invalido.")
-        <?php
-        pg_close($dbconn);
-        
-    }elseif( $correo < 1 or $correo > 50 ){
-        #usuario ya existe
-        ?>
-        alert ("\nLargo de correo invalido.")
-        <?php
-        pg_close($dbconn);
-        
+        echo '<script language="javascript">';
+        echo 'alert ("\nUsuario ya registrado.")';
+        echo '</script>';
+        #header('Location: '.'/sesion/sign-up.html');
     } else {
         #crear usuario
         $opciones = array('cost'=>12);
@@ -62,9 +33,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if(pg_query_params($dbconn, $sql, array($id, $nombre, $apellido, $correo, $contrasena, $pais, $fecha_registro, $administrador)) !== FALSE){
             header('Location: '.'/extras/sing-up-succes.html');
         } else {
-            echo '<br> Ocurrió un error';
+            echo '<script language="javascript">';
+            echo 'alert ("\nHa ocurrido un error.")';
+            echo '</script>';
+            header('Location: '.'/sesion/sign-up.html');
         }
-        pg_close($dbconn);
     }
+    pg_close($dbconn);
 }
 ?>
