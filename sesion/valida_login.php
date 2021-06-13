@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $row = pg_fetch_assoc($result);
 	
     #if(password_verify($contrasena, $row['contraseña'])){
-    if($contrasena == $row['contraseña']){
+    if(pg_num_rows($result) == 0 or $contrasena == $row['contraseña']){
 
         session_start();
         $_SESSION["usuario"] = $row['nombre'] . ' ' . $row['apellido'];
@@ -19,19 +19,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["administrador"] = $row['administrador'];
         pg_close($dbconn);
 	
-	if($row['administrador'] == 't'){
-		
-		header('Location: '.'/admin/users/all.html');
-               exit();
-        }
-        else{
+	
 		header('Location: '.'/user/profile.html');
 		exit();
-        }
-        
         
     } else {
-        echo "<br> Contraseña incorrecta";
+        ?>
+        alert ("\nUsuario no encontrado. Intente denuevo...")
+        <?php
         pg_close($dbconn);
     }
     
