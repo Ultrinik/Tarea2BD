@@ -18,10 +18,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["fecha_registro"]= $row['fecha_registro'];
         $_SESSION["administrador"] = $row['administrador'];
         pg_close($dbconn);
-
-
-        header('Location: '.'/user/profile.html');
-        exit();
+	
+	if($row['administrador'] == 't'){
+		
+		header('Location: '.'/admin/users/all.html');
+               exit();
+        }
+        else{
+		header('Location: '.'/user/profile.html');
+		exit();
+        }
         
         
     } else {
