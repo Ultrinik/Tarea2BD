@@ -1,10 +1,9 @@
 <?php include '../include/header.html'; ?>
 
-<body>
+<body background="../img/fondo1.jpg">
 	<!-- <div style="background-image: url('../img/bitcoin1.jpg');"> -->
 	
     <script>
-          
         function checkPassword(form) {
             nombre = form.name.value;
             apellido = form.surname.value;
@@ -44,7 +43,7 @@
 	
 	<div class='container-fluid'>
         <div class='row justify-content-center mt-5'>
-            <div class='container-6 shadow-lg rounded m-auto p-5'>
+            <div class='container-6 shadow-lg rounded m-auto p-5 bg-light'>
                 <h1>Crear Cuenta</h1>
                 <p>Ingrese sus datos para crear una cuenta.</p>
                 <form action="../sesion/valida_signup.php" method="POST" onsubmit="return checkPassword(this)">
