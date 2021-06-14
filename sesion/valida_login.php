@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $row = pg_fetch_assoc($result);
 	
     if(pg_num_rows($result) != 0){
-        #if(password_verify($contrasena, $row['contraseña'])){
+        if(password_verify($contrasena, $row['contraseña'])){
         if($contrasena == $row['contraseña']){
 
             session_start();
