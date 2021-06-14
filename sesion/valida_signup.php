@@ -21,7 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if( pg_num_rows($result) > 0 ){
         #usuario ya existe
         echo '<script language="javascript">';
-        echo 'alert ("\nUsuario ya registrado.")';
+        echo 'alert ("\nUsuario ya registrado.");';
+        echo 'window.location.href = "/sesion/sign-up.html";';
         echo '</script>';
         #header('Location: '.'/sesion/sign-up.html');
     } else {
