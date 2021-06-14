@@ -9,7 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	
     if(pg_num_rows($result) != 0){
         if(password_verify($contrasena, $row['contraseña'])){
-        if($contrasena == $row['contraseña']){
 
             session_start();
             $_SESSION["usuario"] = $row['nombre'] . ' ' . $row['apellido'];

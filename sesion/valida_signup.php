@@ -30,7 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $contrasena_hasheada = password_hash($contrasena, PASSWORD_BCRYPT, $opciones);
         $sql = 'INSERT INTO usuario (id, nombre, apellido, correo, contraseña, pais, fecha_registro, administrador) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
         if(pg_query_params($dbconn, $sql, array($id, $nombre, $apellido, $correo, $contrasena_hasheada, $pais, $fecha_registro, $administrador)) !== FALSE){
-        if(pg_query_params($dbconn, $sql, array($id, $nombre, $apellido, $correo, $contrasena, $pais, $fecha_registro, $administrador)) !== FALSE){
             header('Location: '.'/extras/sing-up-succes.html');
         } else {
             echo '<script language="javascript">';
