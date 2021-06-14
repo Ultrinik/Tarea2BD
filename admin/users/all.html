@@ -1,13 +1,18 @@
 <?php include '../../include/navbar.html'; ?>
 <?php include 'CRUD/all.php'; ?>
+<body background="../../img/fondo4.jpg">
 <div class='container-fluid'>
     <div class="row p-3">
-        <h1>Administración de Usuarios</h1>
+        <div class="col">
+            <div class="container shadow-lg rounded m-auto p-2 bg-light">
+                <center><h1>Administración de Usuarios &#128561</h1></center>
+            </div>
+        </div>    
     </div>
     <div class="row p-3">
         <div class="col">
             <!-- Mostrar aquí los datos de cada usuario -->
-            <div class="container shadow-lg rounded m-auto p-5">
+            <div class="container shadow-lg rounded m-auto p-5 bg-light">
                 <?php if ($sesionActiva and $admin=='t'): ?>
                     <table class="table">
                         <thead>
