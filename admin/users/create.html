@@ -1,6 +1,40 @@
 <?php include '../../include/navbar.html'; ?>
-<?php include 'CRUD/create.php'; ?>
+
 <body background="../../img/fondo2.jpg">
+
+    <script>
+        function checkData(form) {
+            nombre = form.name.value;
+            apellido = form.surname.value;
+            correo = form.email.value;
+            password = form.pwd.value;
+
+            if (nombre.length > 50){
+                alert ("Nombre demasiado largo")
+                return false;
+
+            }
+            else if (apellido.length > 50){
+                alert ("Apellido demasiado largo")
+                return false;
+
+            }
+            else if (correo.length > 50){
+                alert ("Correo demasiado largo")
+                return false;
+                  
+            }
+            else if (password.length > 60){
+                alert ("Contraseña demasiado larga")
+                return false;
+                    
+            }
+            else{
+                return true;
+            }
+        }
+    </script>
+
     <div class='container-fluid'>
         <div class="row p-3">
           <div class="col">
@@ -11,20 +45,20 @@
         </div>
         <div class="row p-3">
             <div class="col">
-                <div class="container shadow-lg rounded m-auto p-5">
-                    <form action="CRUD/create.php" method="POST">
+                <div class="container shadow-lg rounded m-auto p-5 bg-light">
+                    <form action="/CRUD/create.php" method="POST" onsubmit="return checkData(this)">
                         <?php if ($sesionActiva): ?>
                         <div class="form-group">
                             <label for="name">Nombre</label>
-                            <input type="text" class="form-control" placeholder="Nombre" id="name" name="nombre" value=<?= $nombre ?> required>
+                            <input type="text" class="form-control" placeholder="Nombre" id="name" name="nombre" required>
                         </div>
                         <div class="form-group">
                             <label for="apellido">Apellido</label>
-                            <input type="text" class="form-control" placeholder="Apellido" id="apellido" name="apellido" value=<?= $apellido ?>>
+                            <input type="text" class="form-control" placeholder="Apellido" id="surname" name="apellido">
                         </div>
                         <div class="form-group">
                             <label for="email">Correo Electrónico</label>
-                            <input type="email" class="form-control" placeholder="correo@electronico.com" id="correo" name="correo" value=<?= $correo ?> required>
+                            <input type="email" class="form-control" placeholder="correo@electronico.com" id="email" name="correo" required>
                         </div>
                         <div class="form-group">
                             <label for="pwd">Contraseña</label>
