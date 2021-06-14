@@ -33,7 +33,7 @@ Desventajas: Ligero aumento de cómputo por los hasheos.
 ### Correo de usuarios:
 El atributo correo pasa a ser único, ya que este es el dato que se usará para definir los registros.  
 Ventajas: Evita tener que verificar en php si el correo ya se registró.  
-Desventajas: No sé.
+Desventajas: Ninguna.
 
 ## Dificultades:
 Nuestra principal dificultad en esta tarea consistió en el uso conjunto de las herramientas PHP, html y SQL, sumado a nuestros archivos, pues había que tomar en cuenta muchos cambios pequeños en cada archivo. Además, debido a que algunos integrantes del grupo poseían muy poca o nula experiencia trabajando con estos, se gastó bastante tiempo en aprender los conceptos básicos. Por suerte, estos lenguajes se encuentran bastante documentados y el uso de la biblia stack-overflow nos salvó varias veces. Esto aparte de las milenarias batallas contra los instaladores y configuraciones de las aplicaciones a utilizar, en las cuales vencimos luego de sangre sudor y lágrimas.
