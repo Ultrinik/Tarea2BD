@@ -35,7 +35,9 @@ Ventajas: Evita tener que verificar en php si el correo ya se registró.
 Desventajas: No sé.
 
 ## Cambios extras a archivos:
-blablabla
+
 
 ## Dificultades:
-blablabla
+Nuestra principal dificultad en esta tarea consistió en el uso conjunto de las herramientas Php, html y SQL,sumado a nuestros archivos, pues había que tomar en cuenta muchos cambios pequeños en cada archivo. Además, debido a que algunos integrantes del grupo poseían muy poca o nula experiencia trabajando con estos, se gastó bastante tiempo en aprender los conceptos básicos. Por suerte, estos lenguajes se encuentran bastante documentados y el uso de la biblia stack-overflow nos salvó varias veces. Esto aparte de las milenarias batallas contra los instaladores y configuraciones de las aplicaciones a utilizar, en las cuales vencimos luego de sangre sudor y lágrimas.
+
+En términos de tiempo, estimamos que la tarea nos tomó un total de 30 horas entre los tres integrantes. Consideramos que gastamos la mayor parte del tiempo instalando y aprendiendo a usar PHP y HTML. 
