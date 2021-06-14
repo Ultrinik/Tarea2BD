@@ -10,6 +10,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	</head>
+	<?php include $_SERVER['DOCUMENT_ROOT']. '/sesion/valida_sesion.php' ?>
 	<body background="img/fondo1.jpg">
 
 
@@ -19,10 +20,17 @@
 					<div class ="container-6 shadow-lg rounded m-auto p-5 bg-light " >
 						<center>
 							<h1 style="color:black">Bienvenido &#x1F975 &#x1F988</h1>
-							<p>Inicia sesión o crea una cuenta nueva.</p>
-							<p><a href="/sesion/log-in.html" class="btn btn-primary btn-block btn-lg">Iniciar sesión &#x1F633</a></p>
-							<p><a href="/sesion/sign-up.html" class="btn btn-primary btn-block btn-lg">Regístrate &#x1F928</a></p>
+							<?php if ($sesionActiva): ?>
+								<p>Visita tu perfil o cierra sesión.</p>
+								<p><a href="/user/profile.html" class="btn btn-primary btn-block btn-lg">Mi perfil &#128526</a></p>
+								<p><a href="/sesion/logout.php" class="btn btn-primary btn-block btn-lg">Cerrar sesión &#x1F62D</a></p>
+							<?php else: ?>
+								<p>Inicia sesión o crea una cuenta nueva.</p>
+								<p><a href="/sesion/log-in.html" class="btn btn-primary btn-block btn-lg">Iniciar sesión &#x1F633</a></p>
+								<p><a href="/sesion/sign-up.html" class="btn btn-primary btn-block btn-lg">Regístrate &#x1F928</a></p>
+							<?php endif ?>
 						</center>
+                        <img src="../img/bitcoin.png" width="350" height="350">
 					</div>
 				</div>
 			</div>
