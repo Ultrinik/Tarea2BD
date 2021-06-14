@@ -1,12 +1,17 @@
 <?php include '../include/navbar.html'; ?>
 <?php include 'wallet.php'; ?>
+<body background="../img/fondo2.jpg">
     <div class='container-fluid'>
         <div class="row p-3">
-            <h1>Mi Billetera</h1>
+        	<div class="col">
+                <div class="container shadow-lg rounded m-auto p-2 bg-light">
+            		<center><h1>Mi Billetera &#129297</h1></center>
+        		</div>
+    	</div>
         </div>
         <div class="row p-3">
             <div class="col">
-                <div class="container shadow-lg rounded m-auto p-5">
+                <div class="container shadow-lg rounded m-auto p-5 bg-light">
                     <?php if ($sesionActiva and $num_billeteras > 0): ?>
                         <table class="table">
                             <thead>
