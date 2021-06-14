@@ -5,8 +5,8 @@
 - Lucas Antoncich Loyola 201621012-1
  
 ## Supuestos y consideraciones:
--Consideramos, para el acceso como Administrador, las credenciales: correo = "admin@admin", contraseña: "123" (sin las comillas dobles).
--Consideramos que, luego de tener un registro exitoso, el usuario no queda logeado en la página inmediatamente con las credenciales recién creadas, sino que es redirigido al login para introducir sus credenciales.
+ - Consideramos, para el acceso como Administrador, las credenciales: correo = "admin@admin", contraseña: "123" (sin las comillas dobles).
+ - Consideramos que, luego de tener un registro exitoso, el usuario no queda logeado en la página inmediatamente con las credenciales recién creadas, sino que es redirigido al login para introducir sus credenciales.
 
 
 ## Archivos adicionales:
@@ -35,7 +35,7 @@ El atributo correo pasa a ser único, ya que este es el dato que se usará para 
 Ventajas: Evita tener que verificar en php si el correo ya se registró.  
 Desventajas: No sé.
 
-### Dificultades:
+## Dificultades:
 Nuestra principal dificultad en esta tarea consistió en el uso conjunto de las herramientas PHP, html y SQL, sumado a nuestros archivos, pues había que tomar en cuenta muchos cambios pequeños en cada archivo. Además, debido a que algunos integrantes del grupo poseían muy poca o nula experiencia trabajando con estos, se gastó bastante tiempo en aprender los conceptos básicos. Por suerte, estos lenguajes se encuentran bastante documentados y el uso de la biblia stack-overflow nos salvó varias veces. Esto aparte de las milenarias batallas contra los instaladores y configuraciones de las aplicaciones a utilizar, en las cuales vencimos luego de sangre sudor y lágrimas.
 
 En términos de tiempo, estimamos que la tarea nos tomó un total de 30 horas entre los tres integrantes. Consideramos que gastamos la mayor parte del tiempo instalando y aprendiendo a usar PHP y HTML. 
