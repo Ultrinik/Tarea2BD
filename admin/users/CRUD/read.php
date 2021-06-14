@@ -8,7 +8,6 @@ if(isset($_SESSION['id']) & $_SESSION['administrador'] == 't'){
     $sql = 'SELECT * FROM usuario WHERE id = $1';
     $result = pg_query_params($dbconn, $sql, array($view_id));
     $row = pg_fetch_row($result);
-    echo "<br> ". $row['nombre'];
     $fecha_registro = filter_var($row[6], FILTER_SANITIZE_STRING);
     $nombre = filter_var($row[1], FILTER_SANITIZE_STRING);
     $apellido = filter_var($row[2], FILTER_SANITIZE_STRING);
