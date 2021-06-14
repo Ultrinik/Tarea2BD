@@ -13,18 +13,23 @@
             <div class="col">
                 <div class="container shadow-lg rounded m-auto p-5 bg-light">
                         <!-- Aquí debe aparecer toda la información relevante del usuario -->
-                        <p>ID: </p>
-                        <p>Nombre: </p>
-                        <p>Apellido: </p>
-                        <p>Correo: </p>
-                        <p>País: </p>
-                        <p>Fecha de Ingreso: </p>
+                        
+                        <?php if ($sesionActiva): ?>
+                        <p>ID: <?= $view_id ?></p>
+                        <p>Nombre: <?= $nombre ?></p>
+                        <p>Apellido: <?= $apellido ?></p>
+                        <p>Correo: <?= $correo ?></p>
+                        <p>País: <?= $pais ?></p>
+                        <p>Fecha de Ingreso: <?= $fecha_registro ?></p>
                         <div class='d-flex justify-content-end'>
                             <a href="/admin/users/all.html" class="btn btn-secondary">Volver</a>
                             <!-- Estos links deberían tener el ID asociado -->
-                            <a href="/admin/users/update.html?id=0" class="btn btn-warning mx-3">Editar <i class="fas fa-edit"></i></a>
-                            <a href="/admin/users/CRUD/delete.php?id=0" class="btn btn-danger">Borrar <i class="fas fa-trash-alt"></i></a></td>
+                            <a href="/admin/users/update.html?id=<?= $view_id ?>" class="btn btn-warning mx-3">Editar <i class="fas fa-edit"></i></a>
+                            <a href="/admin/users/CRUD/delete.php?id=<?= $view_id ?>" class="btn btn-danger">Borrar <i class="fas fa-trash-alt"></i></a></td>
                         </div>
+                    <?php else: ?>
+                        <?php header('Location: '.'/extras/redirect.html'); ?>
+                    <?php endif ?>
                 </div>
             </div>
         </div>
