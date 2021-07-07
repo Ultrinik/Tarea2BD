@@ -59,11 +59,12 @@ def update_user(id):
 		return jsonify({'message': 'El usuario no existe'}), 404
 	json = request.get_json(force=True)
 
-	usuario.nombre = json['nombre']
-	usuario.apellido = json['apellido']
-	usuario.correo = json['correo']
-	usuario.contraseña = json['contraseña']
-	usuario.pais = json['pais']
+	if(json.get('id') != None): usuario.id = json['id']
+	if(json.get('nombre') != None): usuario.nombre = json['nombre']
+	if(json.get('apellido') != None): usuario.apellido = json['apellido']
+	if(json.get('correo') != None): usuario.correo = json['correo']
+	if(json.get('contraseña') != None): usuario.contraseña = json['contraseña']
+	if(json.get('pais') != None): usuario.pais = json['pais']
 	usuario.update()
 	return jsonify({'usuario': usuario.json() })
 
@@ -104,7 +105,8 @@ def update_pais(id):
 		return jsonify({'message': 'El pais no existe'}), 404
 	json = request.get_json(force=True)
 
-	pais.nombre = json['nombre']
+	if(json.get('cod_pais') != None): pais.cod_pais = json['cod_pais']
+	if(json.get('nombre') != None): pais.nombre = json['nombre']
 	pais.update()
 	return jsonify({'pais': pais.json() })
 
@@ -145,8 +147,9 @@ def update_cuenta_bancaria(id):
 		return jsonify({'message': 'Esta cuenta_bancaria no existe'}), 404
 	json = request.get_json(force=True)
 
-	cuenta_bancaria.id_usuario = json['id_usuario']
-	cuenta_bancaria.balance = json['balance']
+	if(json.get('numero_cuenta') != None): cuenta_bancaria.numero_cuenta = json['numero_cuenta']
+	if(json.get('id_usuario') != None): cuenta_bancaria.id_usuario = json['id_usuario']
+	if(json.get('balance') != None): cuenta_bancaria.balance = json['balance']
 	cuenta_bancaria.update()
 	return jsonify({'cuenta_bancaria': cuenta_bancaria.json() })
 
@@ -187,7 +190,9 @@ def update_usuario_tiene_moneda(id_moneda,id_usuario):
 		return jsonify({'message': 'El usuario indicado no tiene la moneda indicada'}), 404
 	json = request.get_json(force=True)
 
-	usuario_tiene_moneda.balance = json['balance']
+	if(json.get('id_usuario') != None): usuario_tiene_moneda.id_usuario = json['id_usuario']
+	if(json.get('id_moneda') != None): usuario_tiene_moneda.id_moneda = json['id_moneda']
+	if(json.get('balance') != None): usuario_tiene_moneda.balance = json['balance']
 
 	usuario_tiene_moneda.update()
 	return jsonify({'usuario_tiene_moneda': usuario_tiene_moneda.json() })
@@ -229,8 +234,10 @@ def update_moneda(id):
 		return jsonify({'message': 'La moneda no existe'}), 404
 	json = request.get_json(force=True)
 
-	moneda.sigla = json['sigla']
-	moneda.nombre = json['nombre']
+	if(json.get('id') != None): moneda.id = json['id']
+	if(json.get('sigla') != None): moneda.sigla = json['sigla']
+	if(json.get('nombre') != None): moneda.nombre = json['nombre']
+
 	moneda.update()
 	return jsonify({'moneda': moneda.json() })
 
@@ -271,7 +278,10 @@ def update_precio_moneda(id,fecha):
 		return jsonify({'message': 'La moneda indicada no tiene valores para la fecha indicada'}), 404
 	json = request.get_json(force=True)
 
-	precio_moneda.valor = json['valor']
+	if(json.get('id_moneda') != None): precio_moneda.id_moneda = json['id_moneda']
+	if(json.get('fecha') != None): precio_moneda.fecha = json['fecha']
+	if(json.get('valor') != None): precio_moneda.valor = json['valor']
+
 	precio_moneda.update()
 	return jsonify({'precio_moneda': precio_moneda.json() })
 
