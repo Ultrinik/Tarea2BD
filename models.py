@@ -7,15 +7,16 @@ class Usuario(db.Model):
 	__tablename__ = 'usuario'
 	id = db.Column(db.Integer, primary_key=True)
 	nombre = db.Column(db.String(50), nullable=False) 
-	apellido = db.Column(db.String(50), nullable=True) 
+	apellido = db.Column(db.String(50), nullable=True)
 	correo = db.Column(db.String(50), nullable=False) 
-	contraseña = db.Column(db.String(50), nullable=False) 
+	contraseña = db.Column(db.String(50), nullable=False)
+	pais = db.Column(db.Integer, db.ForeignKey("pais.cod_pais"))
 	fecha_registro = db.Column(db.DateTime(), nullable=False, default=db.func.current_timestamp())
 	
 	@classmethod
-	def create(cls, nm, ap, mail, pass):
+	def create(cls, id_, nm, ap, mail, pss, ct):
 		# Instanciamos un nuevo usuario y lo guardamos en la bd
-		usuario = Usuario(nombre=nm,apellido=ap,correo=mail,contraseña=pass)
+		usuario = Usuario(id=id_,nombre=nm,apellido=ap,correo=mail,contraseña=pss,pais=ct)
 		return usuario.save()
 
 	def save(self):
@@ -24,7 +25,8 @@ class Usuario(db.Model):
 			db.session.commit()
 
 			return self
-		except:
+		except Exception as e:
+			print(str(e))
 			return False
 	def json(self):
 		return {
@@ -52,8 +54,8 @@ class Pais(db.Model):
 	nombre = db.Column(db.String(45), nullable=False)
 	
 	@classmethod
-	def create(cls, nm):
-		pais = Pais(nombre=nm)
+	def create(cls,cp, nm):
+		pais = Pais(cod_pais=cp, nombre=nm)
 		return pais.save()
 
 	def save(self):
@@ -184,8 +186,8 @@ class Moneda(db.Model):
 			return False
 
 class Precio_moneda(db.Model):
-	__tablename__ = 'moneda'
-	id_moneda = db.Column(db.Integer, db.ForeingKey("moneda.id"), primary_key=True)
+	__tablename__ = 'precio_moneda'
+	id_moneda = db.Column(db.Integer, db.ForeignKey("moneda.id"), primary_key=True)
 	fecha = db.Column(db.DateTime(), nullable=False, primary_key=True)
 	valor = db.Column(db.Float, nullable=False)
 	

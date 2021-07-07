@@ -2,7 +2,12 @@ from flask import Flask
 from flask import jsonify
 from config import config
 from models import db
-from models import *
+from models import Usuario
+from models import Pais
+from models import Cuenta_bancaria
+from models import Moneda
+from models import Precio_moneda
+from models import Usuario_tiene_moneda
 from flask import request
 
 def create_app(enviroment):
@@ -22,12 +27,23 @@ app = create_app(enviroment)
 def crear_usuario():
 	json = request.get_json(force=True)
 
-	if json.get('nombre') is None:
+	if json.get('id') is None:
 		return jsonify({'message': 'El formato está mal'}), 400
 
-	usario = Usuario.create(json['nombre'],json['apellido'],json['correo'],json['contraseña'],json['fecha_registro'])
+	usuario = Usuario.create(json['id'],json['nombre'],json['apellido'],json['correo'],json['contraseña'], json['pais'])
 
-	return jsonify({'usario': usario.json() })
+	return jsonify({'usuario': usuario.json() })
 
+#PAIS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def crear_pais():
+	json = request.get_json(force=True)
+
+	if json.get('cod_pais') is None:
+		return jsonify({'message': 'El formato está mal'}), 400
+
+	pais = Pais.create(json['cod_pais'],json['nombre'])
+
+	return jsonify({'usuario': pais.json() })
+	
 if __name__ == '__main__':
 	app.run(debug=True)
