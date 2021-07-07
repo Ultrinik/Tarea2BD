@@ -5,9 +5,9 @@ import random as r
 
 import psycopg2
 
-usuario = "postgres"
-nombreDB = "Tarea1"
-contraseña = "pass"
+usuario = "nombre usuario"
+nombreDB = "nombre bd"
+contraseña = "contraseña"
 
 connection = psycopg2.connect(
    host="localhost",
