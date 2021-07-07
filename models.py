@@ -161,8 +161,8 @@ class Moneda(db.Model):
 	nombre = db.Column(db.String(80), nullable=False)
 	
 	@classmethod
-	def create(cls, sg, nm):
-		moneda = Moneda(sigla=sg, nombre=nm)
+	def create(cls,id_, sg, nm):
+		moneda = Moneda(id=id_, sigla=sg, nombre=nm)
 		return moneda.save()
 
 	def save(self):
@@ -175,6 +175,7 @@ class Moneda(db.Model):
 			return False
 	def json(self):
 		return {
+			'id': self.id,
 			'sigla': self.sigla,
 			'nombre': self.nombre
 		}
@@ -196,8 +197,8 @@ class Precio_moneda(db.Model):
 	valor = db.Column(db.Float, nullable=False)
 	
 	@classmethod
-	def create(cls, dt, vl):
-		precio_moneda = Precio_moneda(fecha=dt, valor=vl)
+	def create(cls, im, dt, vl):
+		precio_moneda = Precio_moneda(id_moneda=im, fecha=dt, valor=vl)
 		return precio_moneda.save()
 
 	def save(self):
@@ -210,6 +211,7 @@ class Precio_moneda(db.Model):
 			return False
 	def json(self):
 		return {
+			'id_moneda': self.id_moneda,
 			'fecha': self.fecha,
 			'valor': self.valor
 		}

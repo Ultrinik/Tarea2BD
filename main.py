@@ -69,6 +69,30 @@ def crear_usuario_tiene_moneda():
 	usuario_tiene_moneda = Usuario_tiene_moneda.create(json['id_usuario'],json['id_moneda'],json['balance'])
 
 	return jsonify({'usuario_tiene_moneda': usuario_tiene_moneda.json() })
+
+#MONEDA ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@app.route('/api/moneda/', methods=['POST'])
+def crear_moneda():
+	json = request.get_json(force=True)
+
+	if json.get('id') is None:
+		return jsonify({'message': 'El formato está mal'}), 400
+
+	moneda = Moneda.create(json['id'],json['sigla'],json['nombre'])
+
+	return jsonify({'moneda': moneda.json() })
+
+#PRECIO MONEDA ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@app.route('/api/precio_moneda/', methods=['POST'])
+def crear_precio_moneda():
+	json = request.get_json(force=True)
+
+	if json.get('id_moneda') is None:
+		return jsonify({'message': 'El formato está mal'}), 400
+
+	id_moneda = Precio_moneda.create(json['id_moneda'],json['fecha'],json['valor'])
+
+	return jsonify({'id_moneda': id_moneda.json() })
 	
 if __name__ == '__main__':
 	app.run(debug=True)
