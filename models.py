@@ -89,9 +89,9 @@ class Cuenta_bancaria(db.Model):
 	balance = db.Column(db.Float, nullable=False)
 	
 	@classmethod
-	def create(cls, bl):
-		balance = Cuenta_bancaria(balance=bl)
-		return balance.save()
+	def create(cls, nc, iu, bl):
+		cuenta_bancaria = Cuenta_bancaria(numero_cuenta=nc, id_usuario=iu, balance=bl)
+		return cuenta_bancaria.save()
 
 	def save(self):
 		try:
@@ -103,6 +103,8 @@ class Cuenta_bancaria(db.Model):
 			return False
 	def json(self):
 		return {
+			'numero_cuenta': self.numero_cuenta,
+			'id_usuario': self.id_usuario,
 			'balance': self.balance
 		}
 	def update(self):
@@ -123,9 +125,9 @@ class Usuario_tiene_moneda(db.Model):
 	balance = db.Column(db.Float, nullable=False)
 	
 	@classmethod
-	def create(cls, bl):
-		balance = Usuario_tiene_moneda(balance=bl)
-		return balance.save()
+	def create(cls, iu, im, bl):
+		usuario_tiene_moneda = Usuario_tiene_moneda(id_usuario=iu, id_moneda=im, balance=bl)
+		return usuario_tiene_moneda.save()
 
 	def save(self):
 		try:
@@ -137,6 +139,8 @@ class Usuario_tiene_moneda(db.Model):
 			return False
 	def json(self):
 		return {
+			'id_usuario': self.id_usuario,
+			'id_moneda': self.id_moneda,
 			'balance': self.balance
 		}
 	def update(self):

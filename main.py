@@ -35,6 +35,7 @@ def crear_usuario():
 	return jsonify({'usuario': usuario.json() })
 
 #PAIS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@app.route('/api/pais/', methods=['POST'])
 def crear_pais():
 	json = request.get_json(force=True)
 
@@ -43,7 +44,31 @@ def crear_pais():
 
 	pais = Pais.create(json['cod_pais'],json['nombre'])
 
-	return jsonify({'usuario': pais.json() })
+	return jsonify({'pais': pais.json() })
+
+#CUENTA BANCARIA ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@app.route('/api/cuenta_bancaria/', methods=['POST'])
+def crear_cuenta_bancaria():
+	json = request.get_json(force=True)
+
+	if json.get('numero_cuenta') is None:
+		return jsonify({'message': 'El formato está mal'}), 400
+
+	numero_cuenta = Cuenta_bancaria.create(json['numero_cuenta'],json['id_usuario'],json['balance'])
+
+	return jsonify({'numero_cuenta': numero_cuenta.json() })
+
+#USUARIO TIENE MONEDA ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@app.route('/api/usuario_tiene_moneda/', methods=['POST'])
+def crear_usuario_tiene_moneda():
+	json = request.get_json(force=True)
+
+	if json.get('id_usuario') is None:
+		return jsonify({'message': 'El formato está mal'}), 400
+
+	usuario_tiene_moneda = Usuario_tiene_moneda.create(json['id_usuario'],json['id_moneda'],json['balance'])
+
+	return jsonify({'usuario_tiene_moneda': usuario_tiene_moneda.json() })
 	
 if __name__ == '__main__':
 	app.run(debug=True)
