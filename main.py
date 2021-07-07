@@ -44,6 +44,21 @@ def delete_usuario(id):
 
 	return jsonify({'usuario': usuario.json() })
 
+@app.route('/api/usuario/<id>', methods=['PUT'])
+def update_user(id):
+	usuario = Usuario.query.filter_by(id=id).first()
+	if usuario is None:
+		return jsonify({'message': 'El usuario no existe'}), 404
+	json = request.get_json(force=True)
+
+	usuario.nombre = json['nombre']
+	usuario.apellido = json['apellido']
+	usuario.correo = json['correo']
+	usuario.contraseña = json['contraseña']
+	usuario.pais = json['pais']
+	usuario.update()
+	return jsonify({'usuario': usuario.json() })
+
 #PAIS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @app.route('/api/pais/', methods=['POST'])
 def crear_pais():
@@ -64,6 +79,17 @@ def delete_pais(cod_pais):
 
 	pais.delete()
 
+	return jsonify({'pais': pais.json() })
+
+@app.route('/api/pais/<id>', methods=['PUT'])
+def update_pais(id):
+	pais = Pais.query.filter_by(cod_pais=id).first()
+	if pais is None:
+		return jsonify({'message': 'El pais no existe'}), 404
+	json = request.get_json(force=True)
+
+	pais.nombre = json['nombre']
+	pais.update()
 	return jsonify({'pais': pais.json() })
 
 #CUENTA BANCARIA ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -88,6 +114,18 @@ def delete_cuenta_bancaria(numero_cuenta):
 
 	return jsonify({'cuenta_bancaria': cuenta_bancaria.json() })
 
+@app.route('/api/cuenta_bancaria/<id>', methods=['PUT'])
+def update_cuenta_bancaria(id):
+	cuenta_bancaria = Cuenta_bancaria.query.filter_by(numero_cuenta=id).first()
+	if cuenta_bancaria is None:
+		return jsonify({'message': 'Esta cuenta_bancaria no existe'}), 404
+	json = request.get_json(force=True)
+
+	cuenta_bancaria.id_usuario = json['id_usuario']
+	cuenta_bancaria.balance = json['balance']
+	cuenta_bancaria.update()
+	return jsonify({'cuenta_bancaria': cuenta_bancaria.json() })
+
 #USUARIO TIENE MONEDA ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @app.route('/api/usuario_tiene_moneda/', methods=['POST'])
 def crear_usuario_tiene_moneda():
@@ -108,6 +146,18 @@ def delete_usuario_tiene_moneda(id_usuario,id_moneda):
 
 	usuario_tiene_moneda.delete()
 
+	return jsonify({'usuario_tiene_moneda': usuario_tiene_moneda.json() })
+
+@app.route('/api/usuario_tiene_moneda/<id_moneda>/<id_usuario>', methods=['PUT'])
+def update_usuario_tiene_moneda(id_moneda,id_usuario):
+	usuario_tiene_moneda = Usuario_tiene_moneda.query.filter_by(id_moneda=id_moneda,id_usuario=id_usuario).first()
+	if usuario_tiene_moneda is None:
+		return jsonify({'message': 'El usuario indicado no tiene la moneda indicada'}), 404
+	json = request.get_json(force=True)
+
+	usuario_tiene_moneda.balance = json['balance']
+
+	usuario_tiene_moneda.update()
 	return jsonify({'usuario_tiene_moneda': usuario_tiene_moneda.json() })
 
 #MONEDA ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -132,6 +182,18 @@ def delete_moneda(id):
 
 	return jsonify({'moneda': moneda.json() })
 
+@app.route('/api/moneda/<id>', methods=['PUT'])
+def update_moneda(id):
+	moneda = Moneda.query.filter_by(id=id).first()
+	if moneda is None:
+		return jsonify({'message': 'La moneda no existe'}), 404
+	json = request.get_json(force=True)
+
+	moneda.sigla = json['sigla']
+	moneda.nombre = json['nombre']
+	moneda.update()
+	return jsonify({'moneda': moneda.json() })
+
 #PRECIO MONEDA ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @app.route('/api/precio_moneda/', methods=['POST'])
 def crear_precio_moneda():
@@ -154,5 +216,16 @@ def delete_precio_moneda(id_moneda,fecha):
 
 	return jsonify({'precio_moneda': precio_moneda.json() })
 
+@app.route('/api/precio_moneda/<id_moneda>/<fecha>', methods=['PUT'])
+def update_precio_moneda(id,fecha):
+	precio_moneda = Precio_moneda.query.filter(Precio_moneda.id_moneda==id,Precio_moneda.fecha==fecha).first()
+	if precio_moneda is None:
+		return jsonify({'message': 'La moneda indicada no tiene valores para la fecha indicada'}), 404
+	json = request.get_json(force=True)
+
+	precio_moneda.valor = json['valor']
+	precio_moneda.update()
+	return jsonify({'precio_moneda': precio_moneda.json() })
+	
 if __name__ == '__main__':
 	app.run(debug=True)

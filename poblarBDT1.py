@@ -2,12 +2,12 @@ from datetime import date, datetime, timedelta
 import random as r
 
 #Librerías para PostgreSQL
-import pg
+
 import psycopg2
 
-usuario = "Escribir usuario"
-nombreDB = "Escribir nombre BD"
-contraseña = "Escribir contraseña"
+usuario = "postgres"
+nombreDB = "Tarea1"
+contraseña = "pass"
 
 connection = psycopg2.connect(
    host="localhost",
