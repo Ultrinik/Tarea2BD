@@ -216,7 +216,7 @@ def delete_precio_moneda(id_moneda,fecha):
 
 	return jsonify({'precio_moneda': precio_moneda.json() })
 
-@app.route('/api/precio_moneda/<id_moneda>/<fecha>', methods=['PUT'])
+@app.route('/api/precio_moneda/<id>/<fecha>', methods=['PUT'])
 def update_precio_moneda(id,fecha):
 	precio_moneda = Precio_moneda.query.filter(Precio_moneda.id_moneda==id,Precio_moneda.fecha==fecha).first()
 	if precio_moneda is None:
@@ -226,6 +226,6 @@ def update_precio_moneda(id,fecha):
 	precio_moneda.valor = json['valor']
 	precio_moneda.update()
 	return jsonify({'precio_moneda': precio_moneda.json() })
-	
+
 if __name__ == '__main__':
 	app.run(debug=True)
