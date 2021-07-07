@@ -23,6 +23,14 @@ enviroment = config['development']
 app = create_app(enviroment)
 
 #USUARIO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@app.route('/api/usuario/<id>', methods=['GET'])
+def get_usuario(id):
+	usuario = Usuario.query.filter_by(id=id).first()
+	if usuario is None:
+		return jsonify({'message': 'usuario does not exists'}), 404
+
+	return jsonify({'usuario': usuario.json() })
+
 @app.route('/api/usuario/', methods=['POST'])
 def crear_usuario():
 	json = request.get_json(force=True)
@@ -45,6 +53,14 @@ def delete_usuario(id):
 	return jsonify({'usuario': usuario.json() })
 
 #PAIS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@app.route('/api/pais/<cod_pais>', methods=['GET'])
+def get_pais(cod_pais):
+	pais = Pais.query.filter_by(cod_pais=cod_pais).first()
+	if pais is None:
+		return jsonify({'message': 'pais does not exists'}), 404
+
+	return jsonify({'pais': pais.json() })
+
 @app.route('/api/pais/', methods=['POST'])
 def crear_pais():
 	json = request.get_json(force=True)
@@ -67,6 +83,14 @@ def delete_pais(cod_pais):
 	return jsonify({'pais': pais.json() })
 
 #CUENTA BANCARIA ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@app.route('/api/cuenta_bancaria/<numero_cuenta>', methods=['GET'])
+def get_cuenta_bancaria(numero_cuenta):
+	cuenta_bancaria = Cuenta_bancaria.query.filter_by(numero_cuenta=numero_cuenta).first()
+	if cuenta_bancaria is None:
+		return jsonify({'message': 'cuenta_bancaria does not exists'}), 404
+
+	return jsonify({'cuenta_bancaria': cuenta_bancaria.json() })
+
 @app.route('/api/cuenta_bancaria/', methods=['POST'])
 def crear_cuenta_bancaria():
 	json = request.get_json(force=True)
@@ -89,6 +113,14 @@ def delete_cuenta_bancaria(numero_cuenta):
 	return jsonify({'cuenta_bancaria': cuenta_bancaria.json() })
 
 #USUARIO TIENE MONEDA ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@app.route('/api/usuario_tiene_moneda/<id_usuario>/<id_moneda>', methods=['GET'])
+def get_usuario_tiene_moneda(id_usuario,id_moneda):
+	usuario_tiene_moneda = Usuario_tiene_moneda.query.filter(Usuario_tiene_moneda.id_usuario==id_usuario, Usuario_tiene_moneda.id_moneda==id_moneda).first()
+	if usuario_tiene_moneda is None:
+		return jsonify({'message': 'usuario_tiene_moneda does not exists'}), 404
+
+	return jsonify({'usuario_tiene_moneda': usuario_tiene_moneda.json() })
+
 @app.route('/api/usuario_tiene_moneda/', methods=['POST'])
 def crear_usuario_tiene_moneda():
 	json = request.get_json(force=True)
@@ -111,6 +143,14 @@ def delete_usuario_tiene_moneda(id_usuario,id_moneda):
 	return jsonify({'usuario_tiene_moneda': usuario_tiene_moneda.json() })
 
 #MONEDA ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@app.route('/api/moneda/<id>', methods=['GET'])
+def get_moneda(id):
+	moneda = Moneda.query.filter_by(id=id).first()
+	if moneda is None:
+		return jsonify({'message': 'moneda does not exists'}), 404
+
+	return jsonify({'moneda': moneda.json() })
+
 @app.route('/api/moneda/', methods=['POST'])
 def crear_moneda():
 	json = request.get_json(force=True)
@@ -133,6 +173,14 @@ def delete_moneda(id):
 	return jsonify({'moneda': moneda.json() })
 
 #PRECIO MONEDA ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@app.route('/api/precio_moneda/<id_moneda>/<fecha>', methods=['GET'])
+def get_precio_moneda(id_moneda,fecha):
+	precio_moneda = Precio_moneda.query.filter(Precio_moneda.id_moneda==id_moneda, Precio_moneda.fecha==fecha).first()
+	if precio_moneda is None:
+		return jsonify({'message': 'precio_moneda does not exists'}), 404
+
+	return jsonify({'precio_moneda': precio_moneda.json() })
+
 @app.route('/api/precio_moneda/', methods=['POST'])
 def crear_precio_moneda():
 	json = request.get_json(force=True)
