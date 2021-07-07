@@ -12,6 +12,10 @@ class Usuario(db.Model):
 	contraseña = db.Column(db.String(50), nullable=False)
 	pais = db.Column(db.Integer, db.ForeignKey("pais.cod_pais"))
 	fecha_registro = db.Column(db.DateTime(), nullable=False, default=db.func.current_timestamp())
+
+	cuenta_bancaria = db.relationship('Cuenta_bancaria', cascade="all,delete", backref="parent_user", lazy='dynamic')
+	usuario_tiene_moneda = db.relationship('Usuario_tiene_moneda', cascade="all,delete", backref="parent_user", lazy='dynamic')
+	
 	
 	@classmethod
 	def create(cls, id_, nm, ap, mail, pss, ct):
@@ -35,6 +39,7 @@ class Usuario(db.Model):
 			'apellido': self.apellido,
 			'correo': self.correo,
 			'contraseña': self.contraseña,
+			'pais': self.pais,
 			'fecha_registro': self.fecha_registro
 		}
 	def update(self):
@@ -160,6 +165,9 @@ class Moneda(db.Model):
 	sigla = db.Column(db.String(10), nullable=False)
 	nombre = db.Column(db.String(80), nullable=False)
 	
+	usuario_tiene_moneda = db.relationship('Usuario_tiene_moneda', cascade="all,delete", backref="parent_coin", lazy='dynamic')
+	precio_moneda = db.relationship('Precio_moneda', cascade="all,delete", backref="parent_coin", lazy='dynamic')
+
 	@classmethod
 	def create(cls,id_, sg, nm):
 		moneda = Moneda(id=id_, sigla=sg, nombre=nm)
