@@ -1,0 +1,62 @@
+<?php include '../../include/navbar.html'; ?>
+<?php include 'validar_sesion.php'; ?>
+<body background="../../img/fondo2.jpg">
+<div class='container-fluid'>
+    <div class="row p-3">
+        <div class="col">
+            <div class="container shadow-lg rounded m-auto p-2 bg-light">
+                <center><h1>Administración tabla Usuario tiene moneda &#128561</h1></center>
+            </div>
+        </div>    
+    </div>
+    <div class="row p-3">
+        <div class="col">
+            <!-- Mostrar aquí los datos de cada usuario -->
+            <div class="container shadow-lg rounded m-auto p-5 bg-light">
+
+                <?php if ($sesionActiva): ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID usuario</th>
+                                <th scope="col">ID moneda</th>
+                                <th scope="col">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Debería haber una de estas por cada usuario -->
+                            <!-- Link de las Acciones debe llevar el ID del usuario -->
+                            
+                            <?php
+                                $curl = file_get_contents("http://127.0.0.1:5000/api/usuario_tiene_moneda/");
+                                $json = json_decode($curl, true);
+                                foreach ($json as $rows => $row){
+                                ?>
+                                    <tr>
+                                        <td><?= $row['id_usuario'] ?></td>
+                                        <td><?= $row['id_moneda'] ?></td>
+                                        <td><?= $row['balance'] ?></td>
+                                        <td><a href="read_usuario_tiene_moneda.html?id=<?= $row['id_usuario'] ?>&id_moneda=<?= $row['id_moneda'] ?>" class="btn btn-primary">Ver <i
+                                                    class="fas fa-search"></i></a>
+                                            <a href="update_usuario_tiene_moneda.html?id=<?= $row['id_usuario'] ?>&id_moneda=<?= $row['id_moneda'] ?>" class="btn btn-warning">Editar <i
+                                                    class="fas fa-edit"></i></a>
+                                            <a href="request_usuario_tiene_moneda.php?id=<?= $row['id_usuario'] ?>&id_moneda=<?= $row['id_moneda'] ?>" class="btn btn-danger">Borrar <i
+                                                    class="fas fa-trash-alt"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php 
+                                }
+                                ?>
+                        </tbody>
+                    </table>
+                    <a href="create_usuario_tiene_moneda.html" class="btn btn-success">Nuevo <i class="fas fa-plus"></i></a>
+                <?php else: ?>
+                    <?php header('Location: '.'/extras/redirect.html'); ?>
+                <?php endif ?>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

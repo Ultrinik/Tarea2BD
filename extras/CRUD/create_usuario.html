@@ -1,0 +1,99 @@
+<?php include '../../include/navbar.html'; ?>
+<?php include 'validar_sesion.php'; ?>
+<body background="../../img/fondo2.jpg">
+
+    <script>
+        function checkData(form) {
+            nombre = form.name.value;
+            apellido = form.surname.value;
+            correo = form.email.value;
+            password = form.pwd.value;
+
+            if (nombre.length > 50){
+                alert ("Nombre demasiado largo")
+                return false;
+
+            }
+            else if (apellido.length > 50){
+                alert ("Apellido demasiado largo")
+                return false;
+
+            }
+            else if (correo.length > 50){
+                alert ("Correo demasiado largo")
+                return false;
+                  
+            }
+            else if (password.length > 60){
+                alert ("Contraseña demasiado larga")
+                return false;
+                    
+            }
+            else{
+                return true;
+            }
+        }
+    </script>
+
+    <div class='container-fluid'>
+        <div class="row p-3">
+          <div class="col">
+            <div class="container shadow-lg rounded m-auto p-2 bg-light">
+             <center> <h1>Crear Usuario &#128072</h1></center>
+            </div>
+          </div> 
+        </div>
+        <div class="row p-3">
+            <div class="col">
+                <div class="container shadow-lg rounded m-auto p-5 bg-light">
+                    <form action="request_usuario.php" method="POST" onsubmit="return checkData(this)">
+                        <input name="_method" type="hidden" value="POST" />
+                        <?php if ($sesionActiva): ?>
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" class="form-control" placeholder="Nombre" id="name" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="apellido">Apellido</label>
+                            <input type="text" class="form-control" placeholder="Apellido" id="surname" name="apellido">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico</label>
+                            <input type="email" class="form-control" placeholder="correo@electronico.com" id="email" name="correo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Contraseña</label>
+                            <input type="password" class="form-control" placeholder="Contraseña" id="pwd" name="contraseña" required>
+                        </div>
+                        <!-- NOTA: Los valores están en duro para esta tarea. -->
+                        <div class="form-group">
+                            <label for="country">País</label>
+                            <select class="form-control" id="country" name="pais">
+                              <option value="1">Angola</option>
+                              <option value="2">Sudáfrica</option>
+                              <option value="3">Canadá</option>
+                              <option value="4">Estados Unidos</option>
+                              <option value="5">Chile</option>
+                              <option value="6">Australia</option>
+                              <option value="7">India</option>
+                              <option value="8">Corea del Sur</option>
+                              <option value="9">Rusia</option>
+                              <option value="10">Suiza</option>
+                            </select>
+                          </div>
+                        <div class='d-flex justify-content-end'>
+                            <a class="btn btn-secondary mx-3" href="all_usuario.html">Volver</a>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                        <?php else: ?>
+                            <?php header('Location: '.'/extras/redirect.html'); ?>
+                        <?php endif ?>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

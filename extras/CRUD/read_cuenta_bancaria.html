@@ -1,0 +1,42 @@
+<?php include '../../include/navbar.html'; ?>
+<?php include 'validar_sesion.php'; ?>
+<body background="../../img/fondo2.jpg">
+    <div class='container-fluid'>
+        <div class="row p-3">
+            <div class="col">
+                <div class="container shadow-lg rounded m-auto p-2 bg-light">
+                    <center><h1>Ver Cuenta bancaria &#128064</h1></center>
+                </div>
+            </div>        
+        </div>
+        <div class="row p-3">
+            <div class="col">
+                <div class="container shadow-lg rounded m-auto p-5 bg-light">
+                        <!-- Aquí debe aparecer toda la información relevante del usuario -->
+                        
+                        <?php if ($sesionActiva):
+                            $url_components = parse_url($url);
+                            parse_str($url_components['query'], $params);
+                            $url = "http://127.0.0.1:5000/api/cuenta_bancaria/".$_GET['id'];
+                            $curl = file_get_contents($url);
+                            $json = json_decode($curl, true);
+                                ?>
+                        <p>ID Cuenta: <?= $json["cuenta_bancaria"]['numero_cuenta'] ?></p>
+                        <p>ID Usuario: <?= $json["cuenta_bancaria"]['id_usuario'] ?></p>
+                        <p>Balance: <?= $json["cuenta_bancaria"]['balance'] ?></p>
+                        <div class='d-flex justify-content-end'>
+                            <a href="all_cuenta_bancaria.html" class="btn btn-secondary">Volver</a>
+                            <!-- Estos links deberían tener el ID asociado -->
+                            <a href="update_cuenta_bancaria.html?id=<?= $json["cuenta_bancaria"]['numero_cuenta'] ?>" class="btn btn-warning mx-3">Editar <i class="fas fa-edit"></i></a>
+                            <a href="request_cuenta_bancaria.php?id=<?= $json["cuenta_bancaria"]['numero_cuenta'] ?>"  class="btn btn-danger">Borrar <i class="fas fa-trash-alt"></i></a></td>
+                        </div>
+                    <?php else: ?>
+                        <?php header('Location: '.'/extras/redirect.html'); ?>
+                    <?php endif ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

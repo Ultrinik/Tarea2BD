@@ -12,6 +12,7 @@ class Usuario(db.Model):
 	contraseña = db.Column(db.String(50), nullable=False)
 	pais = db.Column(db.Integer, db.ForeignKey("pais.cod_pais"))
 	fecha_registro = db.Column(db.DateTime(), nullable=False, default=db.func.current_timestamp())
+	administrador = db.Column(db.Boolean, nullable=False)
 
 	cuenta_bancaria = db.relationship('Cuenta_bancaria', cascade="all,delete", backref="parent_user", lazy='dynamic')
 	usuario_tiene_moneda = db.relationship('Usuario_tiene_moneda', cascade="all,delete", backref="parent_user", lazy='dynamic')
@@ -20,7 +21,7 @@ class Usuario(db.Model):
 	@classmethod
 	def create(cls, id_, nm, ap, mail, pss, ct):
 		# Instanciamos un nuevo usuario y lo guardamos en la bd
-		usuario = Usuario(id=id_,nombre=nm,apellido=ap,correo=mail,contraseña=pss,pais=ct)
+		usuario = Usuario(id=id_,nombre=nm,apellido=ap,correo=mail,contraseña=pss,pais=ct, administrador=False)
 		return usuario.save()
 
 	def save(self):
@@ -40,7 +41,7 @@ class Usuario(db.Model):
 			'correo': self.correo,
 			'contraseña': self.contraseña,
 			'pais': self.pais,
-			'fecha_registro': self.fecha_registro
+			'fecha_registro': str(self.fecha_registro)
 		}
 	def update(self):
 		self.save()
@@ -220,7 +221,7 @@ class Precio_moneda(db.Model):
 	def json(self):
 		return {
 			'id_moneda': self.id_moneda,
-			'fecha': self.fecha,
+			'fecha': str(self.fecha),
 			'valor': self.valor
 		}
 	def update(self):

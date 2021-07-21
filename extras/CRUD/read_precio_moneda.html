@@ -1,0 +1,44 @@
+<?php include '../../include/navbar.html'; ?>
+<?php include 'validar_sesion.php'; ?>
+<body background="../../img/fondo2.jpg">
+    <div class='container-fluid'>
+        <div class="row p-3">
+            <div class="col">
+                <div class="container shadow-lg rounded m-auto p-2 bg-light">
+                    <center><h1>Ver Precio Monedas &#128064</h1></center>
+                </div>
+            </div>        
+        </div>
+        <div class="row p-3">
+            <div class="col">
+                <div class="container shadow-lg rounded m-auto p-5 bg-light">
+                        <!-- Aquí debe aparecer toda la información relevante del usuario -->
+                        
+                        <?php if ($sesionActiva):
+                            $url_components = parse_url($url);
+                            parse_str($url_components['query'], $params);
+                            $fecha = str_replace(' ', '_', $_GET['fecha']);
+                            $url = "http://127.0.0.1:5000/api/precio_moneda/".$_GET['id']."/".$fecha;
+                            $curl = file_get_contents($url);
+                            $json = json_decode($curl, true);
+                            $fecha_format = explode('.', $json["precio_moneda"]['fecha'])[0];
+                                ?>
+                        <p>ID: <?= $json["precio_moneda"]['id_moneda'] ?></p>
+                        <p>Fecha: <?= $fecha_format ?></p>
+                        <p>Valor: <?= $json["precio_moneda"]['valor'] ?></p>
+                        <div class='d-flex justify-content-end'>
+                            <a href="all_precio_moneda.html" class="btn btn-secondary">Volver</a>
+                            <!-- Estos links deberían tener el ID asociado -->
+                            <a href="update_precio_moneda.html?id=<?= $json["precio_moneda"]['id_moneda'] ?>&fecha=<?= $json["precio_moneda"]['fecha'] ?>" class="btn btn-warning mx-3">Editar <i class="fas fa-edit"></i></a>
+                            <a href="request_precio_moneda.php?id=<?= $json["precio_moneda"]['id_moneda'] ?>&fecha=<?= $json["precio_moneda"]['fecha'] ?>"  class="btn btn-danger">Borrar <i class="fas fa-trash-alt"></i></a></td>
+                        </div>
+                    <?php else: ?>
+                        <?php header('Location: '.'/extras/redirect.html'); ?>
+                    <?php endif ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

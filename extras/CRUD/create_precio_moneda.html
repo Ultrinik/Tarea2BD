@@ -1,0 +1,50 @@
+<?php include '../../include/navbar.html'; ?>
+<?php include 'validar_sesion.php'; ?>
+<body background="../../img/fondo2.jpg">
+    <div class='container-fluid'>
+        <div class="row p-3">
+          <div class="col">
+            <div class="container shadow-lg rounded m-auto p-2 bg-light">
+             <center> <h1>Crear Precio Moneda &#128072</h1></center>
+            </div>
+          </div> 
+        </div>
+        <div class="row p-3">
+            <div class="col">
+                <div class="container shadow-lg rounded m-auto p-5 bg-light">
+                    <form action="request_precio_moneda.php" method="POST">
+                        <input name="_method" type="hidden" value="POST" />
+                        <?php if ($sesionActiva): ?>
+                        <div class="form-group">
+                            <label for="id_moneda">ID de la moneda</label>
+                            <input type="text" class="form-control" placeholder="id" id="id_moneda" name="id_moneda" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha">Fecha</label>
+                            <input type="text" class="form-control" placeholder="2020-12-07" id="surname" name="fecha">
+                        </div>
+                        <div class="form-group">
+                            <label for="hora">Hora</label>
+                            <input type="text" class="form-control" placeholder="06:33:26" id="hora" name="hora" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="valor">Valor</label>
+                            <input type="text" class="form-control" placeholder="10" id="valor" name="valor" required>
+                        </div>
+                        
+                        <div class='d-flex justify-content-end'>
+                            <a class="btn btn-secondary mx-3" href="all_precio_moneda.html">Volver</a>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                        <?php else: ?>
+                            <?php header('Location: '.'/extras/redirect.html'); ?>
+                        <?php endif ?>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

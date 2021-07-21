@@ -1,0 +1,45 @@
+<?php include '../../include/navbar.html'; ?>
+<?php include 'validar_sesion.php'; ?>
+<body background="../../img/fondo2.jpg">
+    <div class='container-fluid'>
+        <div class="row p-3">
+          <div class="col">
+            <div class="container shadow-lg rounded m-auto p-2 bg-light">
+            <center><h1>Editar Usuario tiene moneda &#9999</h1></center>
+          </div>
+        </div>
+        </div>
+        <div class="row p-3">
+            <div class="col">
+                <div class="container shadow-lg rounded m-auto p-5 bg-light">
+                    <!-- El formulario debe aparecer llenado con los valores actuales de los parámetros -->
+                    <?php if ($sesionActiva):
+                            $url_components = parse_url($url);
+                            parse_str($url_components['query'], $params);
+                            $url = "http://127.0.0.1:5000/api/usuario_tiene_moneda/".$_GET['id']."/".$_GET['id_moneda'];
+                            $curl = file_get_contents($url);
+                            $json = json_decode($curl, true);
+                                ?>
+                    <form action="request_usuario_tiene_moneda.php" method="POST">
+                        <input name="_method" type="hidden" value="PUT" />
+                        <input name="id" type="hidden" value= <?= $_GET['id'] ?> />
+                        <input name="id_moneda" type="hidden" value= <?= $_GET['id_moneda'] ?> />
+                        <div class="form-group">
+                            <label for="balance">Balance</label>
+                            <input type="text" class="form-control" placeholder="balance" id="balance" name="balance" value=<?= $json["usuario_tiene_moneda"]['balance'] ?> required>
+                        </div>
+                        
+                        <div class='d-flex justify-content-end'>
+                            <a class="btn btn-secondary mx-3" href="all_usuario_tiene_moneda.html">Volver</a>
+                            <button type="submit" class="btn btn-primary" >Guardar cambios</button>
+                        </div>
+                  <?php else: ?>
+                      <?php header('Location: '.'/extras/redirect.html'); ?>
+                  <?php endif ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
