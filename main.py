@@ -10,6 +10,7 @@ from models import Precio_moneda
 from models import Usuario_tiene_moneda
 from flask import request
 from sqlalchemy.sql.expression import func
+import simplejson
 
 def create_app(enviroment):
 	app = Flask(__name__)
@@ -312,6 +313,27 @@ def update_precio_moneda(id,fecha):
 
 	precio_moneda.update()
 	return jsonify({'precio_moneda': precio_moneda.json() })
+
+@app.route('/api/consultas/<id>', methods=['POST'])
+def get_consulta(id):
+	print('Entrando a la consulta '+id)
+	json = request.get_json(force=True)
+
+	if(id == '1'):
+		y = json['year']
+		first = y+'-01-01'
+		last = y+'-12-31'
+		result = db.session.execute('SELECT * FROM usuario WHERE usuario.fecha_registro >= :first AND usuario.fecha_registro <= :last', {'first': first, 'last':last})
+		return jsonify({'result': [dict(row) for row in result]})
+	elif(id == '2'):
+		limit = json['limit']
+		result = db.session.execute('SELECT numero_cuenta, balance FROM cuenta_bancaria WHERE cuenta_bancaria.balance > :limit',{'limit':limit})
+		response = simplejson.dumps(result)
+		return jsonify({'result': [dict(row) for row in response]})
+
+
+
+
 
 if __name__ == '__main__':
 	app.run(debug=True)
