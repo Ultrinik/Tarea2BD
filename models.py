@@ -59,6 +59,8 @@ class Pais(db.Model):
 	cod_pais = db.Column(db.Integer, primary_key=True)
 	nombre = db.Column(db.String(45), nullable=False)
 	
+	usuario = db.relationship('Usuario', cascade="all,delete", backref="parent_pais", lazy='dynamic')
+	
 	@classmethod
 	def create(cls,cp, nm):
 		pais = Pais(cod_pais=cp, nombre=nm)
