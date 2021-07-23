@@ -22,13 +22,17 @@
                                 ?>
                     <form action="request_cuenta_bancaria.php" method="POST">
                         <input name="_method" type="hidden" value="PUT" />
-                        <input name="id" type="hidden" value= <?= $_GET['id'] ?> />
+                        <input name="id_url" type="hidden" value= <?= $_GET['id'] ?> />
                         <div class="form-group">
+                            <label for="numero_cuenta">Numero de cuenta</label>
+                            <input type="text" class="form-control" placeholder="numero_cuenta" id="numero_cuenta" name="numero_cuenta" value=<?= $json["cuenta_bancaria"]['numero_cuenta'] ?> required>
+                        
                             <label for="id_usuario">ID de usuario</label>
                             <input type="text" class="form-control" placeholder="id_usuario" id="id_usuario" name="id_usuario" value=<?= $json["cuenta_bancaria"]['id_usuario'] ?> required>
+                            
                             <label for="balance">Balance</label>
                             <input type="text" class="form-control" placeholder="balance" id="balance" name="balance" value=<?= $json["cuenta_bancaria"]['balance'] ?> required>
-                        </div>
+                            </div>
                         
                         <div class='d-flex justify-content-end'>
                             <a class="btn btn-secondary mx-3" href="all_cuenta_bancaria.html">Volver</a>

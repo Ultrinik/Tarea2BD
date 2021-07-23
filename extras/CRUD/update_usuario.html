@@ -22,8 +22,12 @@
                                 ?>
                     <form action="request_usuario.php" method="POST">
                         <input name="_method" type="hidden" value="PUT" />
-                        <input name="id" type="hidden" value= <?= $_GET['id'] ?> />
+                        <input name="id_url" type="hidden" value= <?= $_GET['id'] ?> />
 
+                        <div class="form-group">
+                            <label for="name">ID</label>
+                            <input type="text" class="form-control" placeholder="Id" id="id" name="id" value=<?=  $_GET['id'] ?> required>
+                        </div>
                         <div class="form-group">
                             <label for="name">Nombre</label>
                             <input type="text" class="form-control" placeholder="Nombre" id="name" name="nombre" value=<?= $json["usuario"]['nombre'] ?>  required>
@@ -55,7 +59,19 @@
                               <option value="9">Rusia</option>
                               <option value="10">Suiza</option>
                             </select>
-                          </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Fecha de registro</label>
+                            <?php
+                                $fecha = $json["usuario"]['fecha_registro'];
+                                $fecha_format = explode(' ', $fecha)[0];
+                                $hora_format = explode(' ', $fecha)[1];
+                            ?>
+                            <label for="fecha">Fecha</label>
+                            <input type="text" class="form-control" placeholder="fecha" id="fecha" name="fecha" value=<?= $fecha_format ?> required>
+                            <label for="hora">Hora</label>
+                            <input type="text" class="form-control" placeholder="hora" id="hora" name="hora" value=<?= $hora_format ?> required>
+                            </div>
                         
                         <div class='d-flex justify-content-end'>
                             <a class="btn btn-secondary mx-3" href="all_usuario.html">Volver</a>

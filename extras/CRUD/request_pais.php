@@ -7,7 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($_POST['_method'] === 'PUT'){
         $nombre = $_POST['nombre'];
         $id = $_POST['id'];
-        $url = 'http://127.0.0.1:5000/api/pais/'.$id;
+        $id_url = $_POST['id_url'];
+        $url = 'http://127.0.0.1:5000/api/pais/'.$id_url;
         $ch = curl_init($url);
 
         $data = array('cod_pais'=>$id,'nombre'=>$nombre);

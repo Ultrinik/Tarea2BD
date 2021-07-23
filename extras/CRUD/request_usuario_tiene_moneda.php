@@ -3,13 +3,15 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
 
     if($_POST['_method'] === 'PUT'){
-        $id = $_POST['id'];
+        $id_usuario = $_POST['id_usuario'];
         $id_moneda = $_POST['id_moneda'];
+        $id_usuario_url = $_POST['id_usuario_url'];
+        $id_moneda_url = $_POST['id_moneda_url'];
         $balance = $_POST['balance'];
-        $url = 'http://127.0.0.1:5000/api/usuario_tiene_moneda/'.$id_moneda.'/'.$id;
+        $url = 'http://127.0.0.1:5000/api/usuario_tiene_moneda/'.$id_moneda_url.'/'.$id_usuario_url;
         $ch = curl_init($url);
 
-        $data = array('id_usuario'=>$id, 'id_moneda'=>$id_moneda, 'balance'=>$balance);
+        $data = array('id_usuario'=>$id_usuario, 'id_moneda'=>$id_moneda, 'balance'=>$balance);
         $data_json = json_encode($data);
 
         curl_setopt($ch, CURLOPT_URL, $url);

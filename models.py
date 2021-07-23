@@ -29,8 +29,7 @@ class Usuario(db.Model):
 			db.session.commit()
 
 			return self
-		except Exception as e:
-			print(str(e))
+		except:
 			return False
 	def json(self):
 		return {
@@ -50,10 +49,7 @@ class Usuario(db.Model):
 			db.session.commit()
 
 			return True
-		except Exception as e:
-			print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-			print(e)
-			print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
+		except:
 			return False
 
 class Pais(db.Model):
@@ -145,10 +141,7 @@ class Usuario_tiene_moneda(db.Model):
 			db.session.commit()
 
 			return self
-		except Exception as e:
-			print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-			print(e)
-			print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
+		except:
 			return False
 	def json(self):
 		return {
@@ -164,10 +157,7 @@ class Usuario_tiene_moneda(db.Model):
 			db.session.commit()
 
 			return True
-		except Exception as e:
-			print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-			print(e)
-			print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
+		except:
 			return False
 
 class Moneda(db.Model):

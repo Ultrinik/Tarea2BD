@@ -23,7 +23,13 @@
                                 ?>
                     <form action="request_pais.php" method="POST">
                         <input name="_method" type="hidden" value="PUT" />
-                        <input name="id" type="hidden" value= <?= $_GET['id'] ?> />
+                        <input name="id_url" type="hidden" value= <?= $_GET['id'] ?> />
+
+                        <div class="form-group">
+                            <label for="name">ID país</label>
+                            <input type="text" class="form-control" placeholder="Id" id="id" name="id" value=<?=  $_GET['id'] ?> required>
+                        </div>
+
                         <div class="form-group">
                             <label for="name">Nombre del país</label>
                             <input type="text" class="form-control" placeholder="Nombre" id="name" name="nombre" value=<?= $json["pais"]['nombre'] ?> required>

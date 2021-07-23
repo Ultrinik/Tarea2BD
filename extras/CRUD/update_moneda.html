@@ -23,13 +23,19 @@
                                 ?>
                     <form action="request_moneda.php" method="POST">
                         <input name="_method" type="hidden" value="PUT" />
-                        <input name="id" type="hidden" value= <?= $_GET['id'] ?> />
+                        <input name="id_url" type="hidden" value= <?= $_GET['id'] ?> />
+                        <div class="form-group">
+                            <label for="sigla">Id</label>
+                            <input type="text" class="form-control" placeholder="Id" id="id" name="id" value=<?= $_GET['id'] ?> required>
+                        </div>                             
                         <div class="form-group">
                             <label for="sigla">Sigla</label>
-                            <label for="name">Nombre</label>
-                            <input type="text" class="form-control" placeholder="Sigla" id="sigla" name="sigla" value=<?= $json["moneda"]['sigla'] ?> required>
-                            <input type="text" class="form-control" placeholder="Nombre" id="name" name="nombre" value=<?= $json["moneda"]['nombre'] ?> required>
-                        </div>
+                            <input type="text" class="form-control" placeholder="Nombre" id="name" name="nombre" value=<?= $json["moneda"]['sigla'] ?> required>
+                        </div>                        
+                        <div class="form-group">
+                            <label for="sigla">Sigla</label>
+                            <input type="text" class="form-control" placeholder="Sigla" id="sigla" name="sigla" value=<?= $json["moneda"]['nombre'] ?> required>
+                       </div>
                         
                         <div class='d-flex justify-content-end'>
                             <a class="btn btn-secondary mx-3" href="all_moneda.html">Volver</a>

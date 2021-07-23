@@ -75,11 +75,13 @@ def update_user(id):
 		return jsonify({'message': 'El usuario no existe'}), 404
 	json = request.get_json(force=True)
 
+	if(json.get('id') != None): usuario.id = json['id']
 	if(json.get('nombre') != None): usuario.nombre = json['nombre']
 	if(json.get('apellido') != None): usuario.apellido = json['apellido']
 	if(json.get('correo') != None): usuario.correo = json['correo']
 	if(json.get('contraseña') != None): usuario.contraseña = json['contraseña']
 	if(json.get('pais') != None): usuario.pais = json['pais']
+	if(json.get('fecha_registro') != None): usuario.fecha_registro = json['fecha_registro']
 	usuario.update()
 	return jsonify({'usuario': usuario.json() })
 
@@ -218,6 +220,8 @@ def update_usuario_tiene_moneda(id_moneda,id_usuario):
 		return jsonify({'message': 'El usuario indicado no tiene la moneda indicada'}), 404
 	json = request.get_json(force=True)
 
+	if(json.get('id_usuario') != None): usuario_tiene_moneda.id_usuario = json['id_usuario']
+	if(json.get('id_moneda') != None): usuario_tiene_moneda.id_moneda = json['id_moneda']
 	if(json.get('balance') != None): usuario_tiene_moneda.balance = json['balance']
 	usuario_tiene_moneda.update()
 

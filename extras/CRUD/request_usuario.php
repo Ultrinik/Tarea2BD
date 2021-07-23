@@ -4,20 +4,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if($_POST['_method'] === 'PUT'){
 
-        $id = $_POST['id'];
+        $id_url = $_POST['id_url'];
+        $id = filter_var($_POST['id'], FILTER_SANITIZE_STRING);
         $nombre = filter_var($_POST["nombre"], FILTER_SANITIZE_STRING);
         $apellido = filter_var($_POST["apellido"], FILTER_SANITIZE_STRING);
         $correo = filter_var($_POST["correo"], FILTER_SANITIZE_STRING);
-        $contrasena = filter_var($_POST["contraseña"], FILTER_SANITIZE_STRING);
+        $contrasena = filter_var($_POST["pwd"], FILTER_SANITIZE_STRING);
         $pais = filter_var($_POST["pais"], FILTER_SANITIZE_STRING);
+        $fecha = $_POST['fecha'];
+        $hora = $_POST['hora'];
+        $datetime = $fecha . ' ' . $hora;
         
         //$opciones = array('cost'=>12);
         //$contrasena_hasheada = password_hash($contrasena, PASSWORD_BCRYPT, $opciones);
 
-        $url = 'http://127.0.0.1:5000/api/usuario/'.$id;
+        $url = 'http://127.0.0.1:5000/api/usuario/'.$id_url;
         $ch = curl_init($url);
 
-        $data = array('id'=>$id, 'nombre'=>$nombre, 'apellido'=>$apellido, 'correo'=>$correo, 'contraseña'=>$contrasena, 'pais'=>$pais);
+        $data = array('id'=>$id, 'nombre'=>$nombre, 'apellido'=>$apellido, 'correo'=>$correo, 'contraseña'=>$contrasena, 'pais'=>$pais, 'fecha_registro'=>$datetime);
         $data_json = json_encode($data);
 
         curl_setopt($ch, CURLOPT_URL, $url);
