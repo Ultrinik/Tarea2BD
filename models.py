@@ -50,7 +50,10 @@ class Usuario(db.Model):
 			db.session.commit()
 
 			return True
-		except:
+		except Exception as e:
+			print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+			print(e)
+			print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
 			return False
 
 class Pais(db.Model):
@@ -158,7 +161,10 @@ class Usuario_tiene_moneda(db.Model):
 			db.session.commit()
 
 			return True
-		except:
+		except Exception as e:
+			print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+			print(e)
+			print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
 			return False
 
 class Moneda(db.Model):
@@ -233,5 +239,8 @@ class Precio_moneda(db.Model):
 			db.session.commit()
 
 			return True
-		except:
+		except Exception as e:
+			print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+			print(e)
+			print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
 			return False
