@@ -16,13 +16,14 @@
                     <form action="request_usuario_tiene_moneda.php" method="POST">
                         <input name="_method" type="hidden" value="POST" />
                         <?php if ($sesionActiva): ?>
-                        <div class="form-group">
-                            <label for="id_moneda">ID Moneda</label>
-                            <input type="text" class="form-control" placeholder="id_moneda" id="id_moneda" name="id_moneda" required>
-                        </div>
+                        
                         <div class="form-group">
                             <label for="id_usuario">ID Usuario</label>
                             <input type="text" class="form-control" placeholder="id_usuario" id="id_usuario" name="id_usuario" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_moneda">ID Moneda</label>
+                            <input type="text" class="form-control" placeholder="id_moneda" id="id_moneda" name="id_moneda" required>
                         </div>
                         <div class="form-group">
                             <label for="balance">Balance</label>

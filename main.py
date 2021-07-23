@@ -213,7 +213,7 @@ def delete_usuario_tiene_moneda(id_usuario,id_moneda):
 
 @app.route('/api/usuario_tiene_moneda/<id_moneda>/<id_usuario>', methods=['PUT'])
 def update_usuario_tiene_moneda(id_moneda,id_usuario):
-	usuario_tiene_moneda = Usuario_tiene_moneda.query.filter_by(id_moneda=id_moneda,id_usuario=id_usuario).first()
+	usuario_tiene_moneda = Usuario_tiene_moneda.query.filter(Usuario_tiene_moneda.id_usuario==id_usuario, Usuario_tiene_moneda.id_moneda==id_moneda).first()
 	if usuario_tiene_moneda is None:
 		return jsonify({'message': 'El usuario indicado no tiene la moneda indicada'}), 404
 	json = request.get_json(force=True)

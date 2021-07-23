@@ -145,7 +145,10 @@ class Usuario_tiene_moneda(db.Model):
 			db.session.commit()
 
 			return self
-		except:
+		except Exception as e:
+			print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+			print(e)
+			print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
 			return False
 	def json(self):
 		return {

@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = $_POST['id'];
         $id_moneda = $_POST['id_moneda'];
         $balance = $_POST['balance'];
-        $url = 'http://127.0.0.1:5000/api/usuario_tiene_moneda/'.$id.'/'.$id_moneda;
+        $url = 'http://127.0.0.1:5000/api/usuario_tiene_moneda/'.$id_moneda.'/'.$id;
         $ch = curl_init($url);
 
         $data = array('id_usuario'=>$id, 'id_moneda'=>$id_moneda, 'balance'=>$balance);
