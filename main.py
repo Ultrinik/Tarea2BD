@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import jsonify, render_template
+from flask import jsonify, json
 from config import config
 from models import db
 from models import Usuario
@@ -10,11 +10,21 @@ from models import Precio_moneda
 from models import Usuario_tiene_moneda
 from flask import request
 from sqlalchemy.sql.expression import func
-import simplejson
+import decimal
+
+
+class MyJSONEncoder(json.JSONEncoder):
+
+    def default(self, obj):
+        if isinstance(obj, decimal.Decimal):
+            # Convert decimal instances to strings.
+            return str(obj)
+        return super(MyJSONEncoder, self).default(obj)
 
 def create_app(enviroment):
 	app = Flask(__name__)
 	app.config.from_object(enviroment)
+	app.json_encoder = MyJSONEncoder
 	with app.app_context():
 		db.init_app(app)
 		db.create_all()
@@ -326,13 +336,23 @@ def get_consulta(id):
 		result = db.session.execute('SELECT * FROM usuario WHERE usuario.fecha_registro >= :first AND usuario.fecha_registro <= :last', {'first': first, 'last':last})
 		return jsonify({'result': [dict(row) for row in result]})
 	elif(id == '2'):
-		limit = json['limit']
-		result = db.session.execute('SELECT numero_cuenta, balance FROM cuenta_bancaria WHERE cuenta_bancaria.balance > :limit',{'limit':limit})
-		response = simplejson.dumps(result)
-		return jsonify({'result': [dict(row) for row in response]})
-
-
-
+		min = json['min']
+		result = db.session.execute('SELECT numero_cuenta, balance FROM cuenta_bancaria WHERE cuenta_bancaria.balance > :min',{'min':min})
+		return jsonify({'result': [dict(row) for row in result]})
+	elif(id == '3'):
+		pais = json['pais']
+		result = db.session.execute('SELECT pais.nombre as pais, usuario.nombre, usuario.apellido FROM usuario INNER JOIN pais ON usuario.pais = pais.cod_pais WHERE pais.nombre = :pais',{'pais':pais})
+		return jsonify({'result': [dict(row) for row in result]})
+	elif(id == '4'):
+		coin = json['coin']
+		result = db.session.execute('SELECT nombre, MAX(valor) AS Max_valor FROM (SELECT moneda.nombre, precio_moneda.valor FROM moneda RIGHT JOIN precio_moneda ON precio_moneda.id_moneda = moneda.id WHERE moneda.nombre = :coin) AS tabla GROUP BY nombre',{'coin':coin})
+		return jsonify({'result': [dict(row) for row in result]})
+	elif(id == '5'):
+		sigla = json['sigla']
+		result = db.session.execute('SELECT sigla as Moneda, SUM(balance) as Total FROM (SELECT moneda.sigla, usuario_tiene_moneda.balance FROM usuario_tiene_moneda LEFT JOIN moneda ON usuario_tiene_moneda.id_moneda = moneda.id WHERE sigla = :sigla) AS tabla GROUP BY sigla',{'sigla':sigla})
+		return jsonify({'result': [dict(row) for row in result]})
+	else:
+		jsonify({'message': 'Request inválido'}), 404
 
 
 if __name__ == '__main__':
