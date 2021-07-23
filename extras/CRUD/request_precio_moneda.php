@@ -3,12 +3,18 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
 
     if($_POST['_method'] === 'PUT'){
+
+        $fecha_url = $_POST['fecha_url'];
+
         $fecha = $_POST['fecha'];
         $hora = $_POST['hora'];
         $datetime = $fecha . ' ' . $hora;
+
         $valor = $_POST['valor'];
         $id = $_POST['id'];
-        $url = 'http://127.0.0.1:5000/api/precio_moneda/'.$id.'/'.$datetime;
+        
+        $url = 'http://127.0.0.1:5000/api/precio_moneda/'.$id.'/'.$fecha_url;
+
         $ch = curl_init($url);
 
         $data = array('id_moneda'=>$id, 'valor'=>$valor, 'fecha'=>$datetime);

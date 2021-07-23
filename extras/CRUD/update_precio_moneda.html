@@ -16,16 +16,17 @@
                     <?php if ($sesionActiva):
                             $url_components = parse_url($url);
                             parse_str($url_components['query'], $params);
-                            $fecha = str_replace(' ', '_', $_GET['fecha']);
+                            $fecha = str_replace(' ', '%20', $_GET['fecha']);
                             $url = "http://127.0.0.1:5000/api/precio_moneda/".$_GET['id']."/".$fecha;
                             $curl = file_get_contents($url);
                             $json = json_decode($curl, true);
-                            $fecha_format = explode(' ', $json["precio_moneda"]['fecha'])[0];
-                            $hora_format = explode(' ', $json["precio_moneda"]['fecha'])[1];
+                            $fecha_format = explode('%20', $fecha)[0];
+                            $hora_format = explode('%20', $fecha)[1];
                                 ?>
                     <form action="request_precio_moneda.php" method="POST">
                         <input name="_method" type="hidden" value="PUT" />
                         <input name="id" type="hidden" value= <?= $_GET['id'] ?> />
+                        <input name="fecha_url" type="hidden" value= <?= $fecha ?> />
                         <div class="form-group">
                             <label for="fecha">Fecha</label>
                             <input type="text" class="form-control" placeholder="fecha" id="fecha" name="fecha" value=<?= $fecha_format ?> required>
