@@ -12,7 +12,6 @@ class Usuario(db.Model):
 	contraseña = db.Column(db.String(50), nullable=False)
 	pais = db.Column(db.Integer, db.ForeignKey("pais.cod_pais"))
 	fecha_registro = db.Column(db.DateTime(), nullable=False, default=db.func.current_timestamp())
-	administrador = db.Column(db.Boolean, nullable=False)
 
 	cuenta_bancaria = db.relationship('Cuenta_bancaria', cascade="all,delete", backref="parent_user", lazy='dynamic')
 	usuario_tiene_moneda = db.relationship('Usuario_tiene_moneda', cascade="all,delete", backref="parent_user", lazy='dynamic')
@@ -21,7 +20,7 @@ class Usuario(db.Model):
 	@classmethod
 	def create(cls, id_, nm, ap, mail, pss, ct):
 		# Instanciamos un nuevo usuario y lo guardamos en la bd
-		usuario = Usuario(id=id_,nombre=nm,apellido=ap,correo=mail,contraseña=pss,pais=ct, administrador=False)
+		usuario = Usuario(id=id_,nombre=nm,apellido=ap,correo=mail,contraseña=pss,pais=ct)
 		return usuario.save()
 
 	def save(self):

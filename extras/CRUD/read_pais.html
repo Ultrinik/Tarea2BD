@@ -26,8 +26,11 @@
                         <div class='d-flex justify-content-end'>
                             <a href="all_pais.html" class="btn btn-secondary">Volver</a>
                             <!-- Estos links deberían tener el ID asociado -->
-                            <a href="update_pais.html?id=<?= $json["pais"]["cod_pais"] ?>" class="btn btn-warning mx-3">Editar <i class="fas fa-edit"></i></a>
-                            <a href="http://127.0.0.1:5000/api/pais/?id=<?= $json["pais"]["cod_pais"] ?>" class="btn btn-danger">Borrar <i class="fas fa-trash-alt"></i></a></td>
+                            <a href="update_pais.html?id=<?= $json["pais"]["cod_pais"] ?>" class="btn btn-warning mx-3">Editar <i
+                                class="fas fa-edit"></i></a>
+                            <a href="request_pais.php?id=<?= $json["pais"]["cod_pais"] ?>" class="btn btn-danger">Borrar <i
+                                class="fas fa-trash-alt"></i></a>
+                            </td>
                         </div>
                     <?php else: ?>
                         <?php header('Location: '.'/extras/redirect.html'); ?>
