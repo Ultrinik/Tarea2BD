@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $valor = filter_var($_POST["valor"], FILTER_SANITIZE_STRING);
         $fecha = filter_var($_POST["fecha"], FILTER_SANITIZE_STRING);
         $hora = filter_var($_POST["hora"], FILTER_SANITIZE_STRING);
-        $date = $fecha . ' ' . $hora . '.652370';
+        $date = $fecha . ' ' . $hora;
         
 
         $url = 'http://127.0.0.1:5000/api/precio_moneda/';

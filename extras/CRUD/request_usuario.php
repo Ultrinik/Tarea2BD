@@ -11,13 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $contrasena = filter_var($_POST["contraseña"], FILTER_SANITIZE_STRING);
         $pais = filter_var($_POST["pais"], FILTER_SANITIZE_STRING);
         
-        $opciones = array('cost'=>12);
-        $contrasena_hasheada = password_hash($contrasena, PASSWORD_BCRYPT, $opciones);
+        //$opciones = array('cost'=>12);
+        //$contrasena_hasheada = password_hash($contrasena, PASSWORD_BCRYPT, $opciones);
 
         $url = 'http://127.0.0.1:5000/api/usuario/'.$id;
         $ch = curl_init($url);
 
-        $data = array('id'=>$id, 'nombre'=>$nombre, 'apellido'=>$apellido, 'correo'=>$correo, 'pais'=>$pais, 'contraseña'=>$contraseña_hasheada);
+        $data = array('id'=>$id, 'nombre'=>$nombre, 'apellido'=>$apellido, 'correo'=>$correo, 'contraseña'=>$contrasena, 'pais'=>$pais);
         $data_json = json_encode($data);
 
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -37,13 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $contrasena = filter_var($_POST["contraseña"], FILTER_SANITIZE_STRING);
         $pais = filter_var($_POST["pais"], FILTER_SANITIZE_STRING);
         
-        $opciones = array('cost'=>12);
-        $contrasena_hasheada = password_hash($contrasena, PASSWORD_BCRYPT, $opciones);
+        //$opciones = array('cost'=>12);
+        //$contrasena_hasheada = password_hash($contrasena, PASSWORD_BCRYPT, $opciones);
 
         $url = 'http://127.0.0.1:5000/api/usuario/';
         $ch = curl_init($url);
 
-        $data = array('id'=>$id, 'nombre'=>$nombre, 'apellido'=>$apellido, 'correo'=>$correo, 'pais'=>$pais, 'contraseña'=>$contrasena_hasheada);
+        $data = array('id'=>$id, 'nombre'=>$nombre, 'apellido'=>$apellido, 'correo'=>$correo, 'contraseña'=>$contrasena, 'pais'=>$pais);
         $data_json = json_encode($data);
 
         curl_setopt($ch, CURLOPT_URL, $url);
