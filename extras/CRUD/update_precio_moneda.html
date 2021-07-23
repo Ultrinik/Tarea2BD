@@ -20,8 +20,8 @@
                             $url = "http://127.0.0.1:5000/api/precio_moneda/".$_GET['id']."/".$fecha;
                             $curl = file_get_contents($url);
                             $json = json_decode($curl, true);
-                            $fecha_format = explode('.', $json["precio_moneda"]['fecha'])[0];
-                            $hora_format = explode(' ', $fecha_format)[1];
+                            $fecha_format = explode(' ', $json["precio_moneda"]['fecha'])[0];
+                            $hora_format = explode(' ', $json["precio_moneda"]['fecha'])[1];
                                 ?>
                     <form action="request_precio_moneda.php" method="POST">
                         <input name="_method" type="hidden" value="PUT" />

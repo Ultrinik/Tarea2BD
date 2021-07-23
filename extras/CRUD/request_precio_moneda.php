@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($_POST['_method'] === 'PUT'){
         $fecha = $_POST['fecha'];
         $hora = $_POST['hora'];
-        $datetime = $fecha . '_' . $hora . '.652370';
+        $datetime = $fecha . ' ' . $hora;
         $valor = $_POST['valor'];
         $id = $_POST['id'];
         $url = 'http://127.0.0.1:5000/api/precio_moneda/'.$id.'/'.$datetime;

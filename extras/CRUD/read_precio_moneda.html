@@ -24,7 +24,7 @@
                             $fecha_format = explode('.', $json["precio_moneda"]['fecha'])[0];
                                 ?>
                         <p>ID: <?= $json["precio_moneda"]['id_moneda'] ?></p>
-                        <p>Fecha: <?= $fecha_format ?></p>
+                        <p>Fecha: <?= $json["precio_moneda"]['fecha'] ?></p>
                         <p>Valor: <?= $json["precio_moneda"]['valor'] ?></p>
                         <div class='d-flex justify-content-end'>
                             <a href="all_precio_moneda.html" class="btn btn-secondary">Volver</a>
