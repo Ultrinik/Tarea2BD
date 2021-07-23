@@ -10,7 +10,7 @@ from models import Precio_moneda
 from models import Usuario_tiene_moneda
 from flask import request
 from sqlalchemy.sql.expression import func
-import simplejson
+import json as simplejson
 
 def create_app(enviroment):
 	app = Flask(__name__)

@@ -3,9 +3,12 @@
 if(isset($_SESSION['id'])){
     $sesionActiva = 1;
     $admin = $_SESSION['administrador'];
+
+    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+         $url = "https://";   
+    else  
+         $url = "http://";   
     $url.= $_SERVER['HTTP_HOST'];   
-    
-    // Append the requested resource location to the URL   
     $url.= $_SERVER['REQUEST_URI'];    
 }
 else{
