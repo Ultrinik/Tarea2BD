@@ -27,8 +27,10 @@
                         <div class='d-flex justify-content-end'>
                             <a href="all_moneda.html" class="btn btn-secondary">Volver</a>
                             <!-- Estos links deberían tener el ID asociado -->
-                            <a href="update_moneda.html?id=<?= $json["moneda"]["id"] ?>" class="btn btn-warning mx-3">Editar <i class="fas fa-edit"></i></a>
-                            <a href="http://127.0.0.1:5000/api/moneda/?id=<?= $json["moneda"]["id"] ?>" class="btn btn-danger">Borrar <i class="fas fa-trash-alt"></i></a></td>
+                            <a href="update_moneda.html?id=<?= $json["moneda"]["id"] ?>" class="btn btn-warning mx-3">Editar <i
+                                class="fas fa-edit"></i></a>
+                            <a href="request_moneda.php?id=<?= $json["moneda"]["id"] ?>" class="btn btn-danger">Borrar <i
+                                class="fas fa-trash-alt"></i></a></td>
                         </div>
                     <?php else: ?>
                         <?php header('Location: '.'/extras/redirect.html'); ?>
