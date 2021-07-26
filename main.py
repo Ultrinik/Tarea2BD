@@ -355,6 +355,22 @@ def get_consulta(id):
 		sigla = json['sigla']
 		result = db.session.execute('SELECT sigla as Moneda, SUM(balance) as Total FROM (SELECT moneda.sigla, usuario_tiene_moneda.balance FROM usuario_tiene_moneda LEFT JOIN moneda ON usuario_tiene_moneda.id_moneda = moneda.id WHERE sigla = :sigla) AS tabla GROUP BY sigla',{'sigla':sigla})
 		return jsonify({'result': [dict(row) for row in result]})
+	elif(id == '6'):
+		result = db.session.execute('SELECT moneda.sigla,COUNT(usuario_tiene_moneda.id_usuario) FROM usuario_tiene_moneda LEFT JOIN moneda ON usuario_tiene_moneda.id_moneda = moneda.id GROUP BY moneda.sigla ORDER BY count DESC LIMIT 3')
+		return jsonify({'result': [dict(row) for row in result]})
+	elif(id == '7'):
+		mes = json['mes']
+		print(mes)
+
+		result = db.session.execute("SELECT nombre, MAX(cambios) AS max_cambios FROM (SELECT nombre, COUNT(to_char(fecha, 'YYYY-MM')) AS cambios, (SELECT to_char(fecha, 'YYYY-MM')) as mes FROM (SELECT moneda.nombre, precio_moneda.fecha FROM moneda RIGHT JOIN precio_moneda ON precio_moneda.id_moneda = moneda.id ) as tabla GROUP BY nombre, mes ) as tabla2 WHERE mes = :mes GROUP BY nombre ORDER BY max_cambios desc LIMIT 1",{'mes':mes})
+		return jsonify({'result': [dict(row) for row in result]})
+	elif(id == '8'):
+		nombre = json['nombre']
+		apellido = json['apellido']
+		print(nombre, apellido)
+		result = db.session.execute("SELECT top.nombre, top.apellido, moneda.nombre, top.balance FROM (SELECT nombre, apellido, usuario_tiene_moneda.id_moneda, usuario_tiene_moneda.balance FROM usuario LEFT JOIN usuario_tiene_moneda ON usuario.id = usuario_tiene_moneda.id_usuario WHERE  usuario.nombre = :nombre AND usuario.apellido = :apellido GROUP BY nombre, apellido, usuario_tiene_moneda.id_moneda, usuario_tiene_moneda.balance ORDER BY usuario_tiene_moneda.balance desc LIMIT 1) AS top JOIN moneda ON moneda.id = id_moneda",{'nombre':nombre, 'apellido':apellido})
+		return jsonify({'result': [dict(row) for row in result]})
+
 	else:
 		jsonify({'message': 'Request inválido'}), 404
 
