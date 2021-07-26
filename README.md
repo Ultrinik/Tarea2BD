@@ -20,4 +20,9 @@
  
  5. curl -H "Content-Type: application/json" -X POST -d '{"sigla":"XRP"}' http://127.0.0.1:5000/api/consultas/5
  
+ 6. curl -H "Content-Type: application/json" -X POST -d '{}' http://127.0.0.1:5000/api/consultas/6
+
+ 7. curl -H "Content-Type: application/json" -X POST -d '{"mes":"2020-10"}' http://127.0.0.1:5000/api/consultas/7
+
+ 8. curl -H "Content-Type: application/json" -X POST -d '{"nombre":"Bella","apellido":"Hamilton"}' http://127.0.0.1:5000/api/consultas/8
  
