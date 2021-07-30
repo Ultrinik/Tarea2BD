@@ -1,0 +1,84 @@
+<?php include '../../include/navbar.html'; ?>
+<?php include '../CRUD/validar_sesion.php'; ?>
+<body background="../../img/fondo2.jpg">
+    <div class='container-fluid'>
+        <div class="row p-3">
+            <div class="col">
+                <div class="container shadow-lg rounded m-auto p-2 bg-light">
+                    <center><h1>Consulta 5</h1></center>
+                    <center><h5> Obtener la cantidad de moneda X en circulación</h5></center>
+                                
+                    <center>
+                        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+                        <label for="sigla">Moneda X a Buscar:</label>
+                        
+                        <select class="form-control input-sm" id="sigla" name="sigla">
+                          <option value="BTC">Bitcoin (BTC)</option>
+                          <option value="ETH">Ethereum (ETH)</option>
+                          <option value="LTC">Litecoin (LTC)</option>
+                          <option value="DOGE">Dogecoin (DOGE)</option>
+                          <option value="USDT">Tether USD (USDT)</option>
+                          <option value="XLM">Stellar Lumens (XLM)</option>
+                          <option value="XRP">Ripple (XRP)</option>
+                          <option value="BCC">Bitconnect (BCC)</option>
+                          <option value="DRCY">Prestigiocoin (DRCY)</option>
+                          <option value="RP">Riot Points (RP)</option>
+                        </select>
+                        <p></p>
+                        <input type="submit" value="Enviar">
+                    </form>
+                    </center>
+
+            </div>  
+
+        <div class="row p-3">
+            <div class="col">
+                <div class="container shadow-lg rounded m-auto p-5 bg-light">
+                        <!-- Aquí debe aparecer toda la información relevante del usuario -->   
+                        <?php if ($sesionActiva):?>
+                            <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sigla Moneda</th>
+                                <th scope="col">Cantidad en Circulación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $url = "http://127.0.0.1:5000/api/consultas/5";
+                            $data =  array("sigla"=> $_POST['sigla']);
+                            $data_json=json_encode($data);
+                            $curl = curl_init($url);
+                            curl_setopt($curl, CURLOPT_URL, $url);
+                            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+                            curl_setopt($curl,CURLOPT_POSTFIELDS, $data_json);
+                            curl_setopt($curl,CURLOPT_RETURNTRANSFER, true); 
+
+                            $response = curl_exec($curl);
+                            curl_close($curl);
+                            $a =substr($response,10,-2);
+                            $json = json_decode($a, true);
+
+                            foreach ($json as $rows => $row){
+                            ?>
+                            <thead>
+                                <td><?= $row['moneda'] ?></td>
+                                <td><?= $row['total'] ?></td>
+                            </thead>
+                            <?php 
+
+                            }   
+                        ?>
+                        </tbody>
+                    </table>
+                    <?php else: ?>
+                        <?php header('Location: '.'/extras/redirect.html'); ?>
+                    <?php endif ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

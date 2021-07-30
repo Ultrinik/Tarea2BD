@@ -1,0 +1,90 @@
+<?php include '../../include/navbar.html'; ?>
+<?php include '../CRUD/validar_sesion.php'; ?>
+<body background="../../img/fondo2.jpg">
+    <div class='container-fluid'>
+        <div class="row p-3">
+            <div class="col">
+                <div class="container shadow-lg rounded m-auto p-2 bg-light">
+                    <center><h1>Consulta 1</h1></center>
+                    <center><h5>Obtener todos los usuarios registrados durante el año X</h5></center>
+                                
+                    <center>
+
+                        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+                        <label for="año">Año X a Buscar:</label>
+                        <input type="number" id="año" name="año" min="2013" max="2021">
+                        <input type="submit" value="Enviar">
+                    </form>
+                    </center>
+
+            </div>  
+
+        <div class="row p-3">
+            <div class="col">
+                <div class="container shadow-lg rounded m-auto p-5 bg-light">
+                        <!-- Aquí debe aparecer toda la información relevante del usuario -->   
+                        <?php if ($sesionActiva):?>
+                            <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Contraseña</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Fecha Registro</th>
+                                <th scope="col">Pais</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $url = "http://127.0.0.1:5000/api/consultas/1";
+    
+                            
+                            $data =  array("year"=> $_POST['año']);
+                            
+                            
+
+                            
+
+                            $data_json=json_encode($data);
+                            $curl = curl_init($url);
+                            curl_setopt($curl, CURLOPT_URL, $url);
+                            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+                            curl_setopt($curl,CURLOPT_POSTFIELDS, $data_json);
+                            curl_setopt($curl,CURLOPT_RETURNTRANSFER, true); 
+
+                            $response = curl_exec($curl);
+                            curl_close($curl);
+                            
+                            $a =substr($response,10,-2);
+                            $json = json_decode($a, true);
+
+                            foreach ($json  as $rows => $row){
+                            ?>
+                            <thead>
+                                        <td><?= $row['id'] ?></td>
+                                        <td><?= $row['nombre'] ?></td>
+                                        <td><?= $row['apellido'] ?></td>
+                                        <td><?= $row['contraseña'] ?></td>
+                                        <td><?= $row['correo'] ?></td>
+                                        <td><?= $row['fecha_registro'] ?></td>
+                                        <td><?= $row['pais'] ?></td>
+                            </thead>
+                            <?php 
+
+                            }   
+                        ?>
+                        </tbody>
+                    </table>
+                    <?php else: ?>
+                        <?php header('Location: '.'/extras/redirect.html'); ?>
+                    <?php endif ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<?php include '../../include/navbar.html'; ?>
+<?php include '../CRUD/validar_sesion.php'; ?>
+<body background="../../img/fondo2.jpg">
+    <div class='container-fluid'>
+        <div class="row p-3">
+            <div class="col">
+                <div class="container shadow-lg rounded m-auto p-2 bg-light">
+                    <center><h1>Consulta 8</h1></center>
+                    <center><h5> Obtener la criptomoneda más abundante del usuario X</h5></center>
+                                
+                    <center>
+                        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+                        <label for="nombre">Nombre del usuario X a Buscar:</label>
+                        <input type="text" id="nombre" name="nombre" minlenght="2" maxlength="15">
+                        <br>
+                        <label for="nombre">Apellido del usuario X a Buscar:</label>
+                        <input type="text" id="apellido" name="apellido" minlenght="2" maxlength="15">
+                        <br>
+                        <input type="submit" value="Enviar">
+                    </form>
+                    </center>
+
+            </div>  
+
+        <div class="row p-3">
+            <div class="col">
+                <div class="container shadow-lg rounded m-auto p-5 bg-light">
+                        <!-- Aquí debe aparecer toda la información relevante del usuario -->   
+                        <?php if ($sesionActiva):?>
+                            <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre Moneda</th>
+                                <th scope="col">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $url = "http://127.0.0.1:5000/api/consultas/8";
+                            $data =  array("nombre"=> $_POST['nombre'],"apellido"=> $_POST['apellido']);
+                            $data_json=json_encode($data);
+                            $curl = curl_init($url);
+                            curl_setopt($curl, CURLOPT_URL, $url);
+                            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+                            curl_setopt($curl,CURLOPT_POSTFIELDS, $data_json);
+                            curl_setopt($curl,CURLOPT_RETURNTRANSFER, true); 
+
+                            $response = curl_exec($curl);
+                            curl_close($curl);
+                            $a =substr($response,10,-2);
+                            $json = json_decode($a, true);
+
+                            foreach ($json as $rows => $row){
+                            ?>
+                            <thead>
+                                <td><?= $row['nombre'] ?></td>
+                                <td><?= $row['balance'] ?></td>
+                            </thead>
+                            <?php 
+
+                            }   
+                        ?>
+                        </tbody>
+                    </table>
+                    <?php else: ?>
+                        <?php header('Location: '.'/extras/redirect.html'); ?>
+                    <?php endif ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
