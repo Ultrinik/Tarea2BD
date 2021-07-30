@@ -5,7 +5,7 @@
 - Lucas Antoncich Loyola 201621012-1
 
 ## Supuestos:
-- Ya que esto es solo una similacion, las listas de paises estan hardcodeadas, por lo que no se actualizar al modificar la base de datos de estos.
+- Ya que esto es solo una simulación, las listas de países están hardcodeadas, por lo que no se actualizar al modificar la base de datos de estos.
 
 ## Consideraciones:
  - Para actualizar y borrar "usuario_tiene_moneda" se debe introducir primero el id del usuario y luego el de la moneda, es decir para actualizar la moneda 8 del usuario 1, se usa la dirección "127.0.0.1:5000/api/usuario_tiene_moneda/1/8".
